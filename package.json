@@ -1,0 +1,26 @@
+{
+  "name": "branchbeasts",
+  "version": "1.0.0",
+  "description": "CSC307 Group Project\r test push - jack",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelalbertslo/BranchBeasts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/michaelalbertslo/BranchBeasts/issues"
+  },
+  "homepage": "https://github.com/michaelalbertslo/BranchBeasts#readme",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}
