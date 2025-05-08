@@ -30,6 +30,10 @@ function App() {
           count is {count}
         </button>
         <p>Here is the test edit -Christian</p>
+        <img
+          src="https://raw.githubusercontent.com/michaelalbertslo/BranchBeasts/refs/heads/main/assets/images/IMG_3216.JPG"
+          alt="example"
+        />
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
