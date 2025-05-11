@@ -1,49 +1,44 @@
 import mongoose from "mongoose";
-import userModel from "../models/user.js";
+import clothingItemModel from "../models/clothes.js";
 
 mongoose.set("debug", true);
 
-mongoose
-  .connect("mongodb://localhost:27017/users", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .catch((error) => console.log(error));
+// Future DB connection (if needed directly in service)
+// mongoose.connect("mongodb://localhost:27017/closet", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// }).catch((error) => console.log(error));
 
-function getUsers(name, job) {
-  let promise;
-  if (name === undefined && job === undefined) {
-    promise = userModel.find();
-  } else if (name && !job) {
-    promise = findUserByName(name);
-  } else if (job && !name) {
-    promise = findUserByJob(job);
-  }
-  return promise;
+export function getClothingItems(filter = {}) {
+  // filtering: e.g., by user_id, type
+  return clothingItemModel.find(filter);
 }
 
-function findUserById(id) {
-  return userModel.findById(id);
+function getClothingItemById(_id) {
+  return clothingItemModel.findById(_id);
 }
 
-function addUser(user) {
-  const userToAdd = new userModel(user);
-  const promise = userToAdd.save();
-  return promise;
+function addClothingItem(item) {
+  const newItem = new clothingItemModel(item);
+  return newItem.save();
 }
 
-function findUserByName(name) {
-  return userModel.find({ name: name });
+function deleteClothingItemById(_id) {
+  return clothingItemModel.findByIdAndDelete(_id);
 }
 
-function findUserByJob(job) {
-  return userModel.find({ job: job });
+function toggleFavoriteStatus(_id, favorited) {
+  return clothingItemModel.findByIdAndUpdate(
+    _id,
+    { favorited: favorited },
+    { new: true }
+  );
 }
 
 export default {
-  addUser,
-  getUsers,
-  findUserById,
-  findUserByName,
-  findUserByJob,
+  getClothingItems,
+  getClothingItemById,
+  addClothingItem,
+  deleteClothingItemById,
+  toggleFavoriteStatus,
 };

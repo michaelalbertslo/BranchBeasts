@@ -1,25 +1,53 @@
 import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema(
+const ClosetItemSchema = new mongoose.Schema(
   {
-    name: {
+    user_id: {
       type: String,
       required: true,
       trim: true,
     },
-    job: {
+    item_id: {
       type: String,
       required: true,
       trim: true,
-      validate(value) {
-        if (value.length < 2)
-          throw new Error("Invalid job, must be at least 2 characters.");
+      unique: true,
+    },
+    type: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    color: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    size: {
+      type: String,
+      required: true,
+      trim: true,
+      enum: ["XS", "S", "M", "L", "XL", "XXL"], // optional validation
+    },
+    favorited: {
+      type: Boolean,
+      default: false,
+    },
+    image_url: {
+      type: String,
+      required: false,
+      trim: true,
+      validate: {
+        validator: function (v) {
+          return /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/.test(v);
+        },
+        message: "Invalid image URL format.",
       },
     },
   },
-  { collection: "users_list" }
+  { collection: "closet_items" }
 );
 
-const User = mongoose.model("User", UserSchema);
+const ClosetItem = mongoose.model("ClosetItem", ClosetItemSchema);
 
-export default User;
+export default ClosetItem;
