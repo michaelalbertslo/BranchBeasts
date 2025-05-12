@@ -25,10 +25,10 @@ function Outfits() {
   ];
 
   return (
-    <div className="flex justify-center">
-      <div className="grid lg:grid-cols-12 grid-cols-7 gap-4">
+    <div className="flex justify-center py-5">
+      <div className="grid lg:grid-cols-12 grid-cols-6 gap-4">
         {closet.map((clothing, index) => (
-          <div className="flex justify-center items-center bg-gray-400 w-16 h-16" key={index}>
+          <div className="flex justify-center items-center bg-gray-400 w-20 h-20" key={index}>
             <strong>{clothing.box}</strong>
           </div>
         ))}
