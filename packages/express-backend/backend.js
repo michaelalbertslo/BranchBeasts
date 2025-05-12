@@ -22,7 +22,7 @@ const { MONGO_CONNECTION_STRING } = process.env;
 
 mongoose.set("debug", true);
 mongoose
-  .connect(MONGO_CONNECTION_STRING + "closet") // connect to Db "closet"
+  .connect(MONGO_CONNECTION_STRING + "clothes") // connect to Db "closet"
   .catch((error) => console.log(error));
 
 const app = express();

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import clothingItemModel from "../models/clothes.js";
+import clothingItemModel from "../models/clothingItem.js";
 
 mongoose.set("debug", true);
 
