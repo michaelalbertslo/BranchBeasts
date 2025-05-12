@@ -38,26 +38,26 @@ import "./Grid.css"; // import the CSS
 
 function Grid() {
   const closet = [
-    { box : "1"},
-    { box : "2"},
-    { box : "3"},
-    { box : "4"},
-    { box : "5"},
-    { box : "6"},
-    { box : "7"},
-    { box : "8"},
-    { box : "9"},
-    { box : "10"},
-    { box : "11"},
-    { box : "12"},
-    { box : "13"},
-    { box : "14"},
-    { box : "15"},
-    { box : "16"},
-    { box : "17"},
-    { box : "18"},
-    { box : "19"},
-    { box : "20"},
+    { box: "1" },
+    { box: "2" },
+    { box: "3" },
+    { box: "4" },
+    { box: "5" },
+    { box: "6" },
+    { box: "7" },
+    { box: "8" },
+    { box: "9" },
+    { box: "10" },
+    { box: "11" },
+    { box: "12" },
+    { box: "13" },
+    { box: "14" },
+    { box: "15" },
+    { box: "16" },
+    { box: "17" },
+    { box: "18" },
+    { box: "19" },
+    { box: "20" }
   ];
 
   return (
@@ -69,7 +69,6 @@ function Grid() {
           <p>{}</p>
           <p>{}</p>
           <p>{}</p>
-
         </div>
       ))}
     </div>

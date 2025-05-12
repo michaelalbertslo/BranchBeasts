@@ -40,5 +40,5 @@ export default {
   getClothingItemById,
   addClothingItem,
   deleteClothingItemById,
-  toggleFavoriteStatus,
+  toggleFavoriteStatus
 };

@@ -5,33 +5,33 @@ const ClosetItemSchema = new mongoose.Schema(
     user_id: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
     item_id: {
       type: String,
       required: true,
       trim: true,
-      unique: true,
+      unique: true
     },
     type: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
     color: {
       type: String,
       required: true,
-      trim: true,
+      trim: true
     },
     size: {
       type: String,
       required: true,
       trim: true,
-      enum: ["XS", "S", "M", "L", "XL", "XXL"], // optional validation
+      enum: ["XS", "S", "M", "L", "XL", "XXL"] // optional validation
     },
     favorited: {
       type: Boolean,
-      default: false,
+      default: false
     },
     image_url: {
       type: String,
@@ -39,15 +39,20 @@ const ClosetItemSchema = new mongoose.Schema(
       trim: true,
       validate: {
         validator: function (v) {
-          return /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/.test(v);
+          return /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/.test(
+            v
+          );
         },
-        message: "Invalid image URL format.",
-      },
-    },
+        message: "Invalid image URL format."
+      }
+    }
   },
   { collection: "closet_items" }
 );
 
-const ClosetItem = mongoose.model("ClosetItem", ClosetItemSchema);
+const ClosetItem = mongoose.model(
+  "ClosetItem",
+  ClosetItemSchema
+);
 
 export default ClosetItem;

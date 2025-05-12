@@ -8,10 +8,11 @@ import mongoose from "mongoose";
 import clothingItemService from "./services/clothingItem-service.js";
 
 const {
-  addClothingItem,
   getClothingItems,
-  findClothingItemById,
+  getClothingItemById,
+  addClothingItem,
   deleteClothingItemById,
+  toggleFavoriteStatus
 } = clothingItemService;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -31,7 +32,7 @@ app.use(express.json());
 
 /** Get one item by its Mongo _id */
 app.get("/items/:id", (req, res) => {
-  findClothingItemById(req.params.id)
+  getClothingItemById(req.params.id)
     .then((item) => {
       if (!item) {
         return res.status(404).send("Resource not found.");
@@ -75,7 +76,8 @@ app.post("/items", (req, res) => {
 app.delete("/items/:id", (req, res) => {
   deleteClothingItemById(req.params.id)
     .then((deleted) => {
-      if (!deleted) return res.status(404).send("Item not found");
+      if (!deleted)
+        return res.status(404).send("Item not found");
       res.status(204).end();
     })
     .catch((err) => {
@@ -85,5 +87,7 @@ app.delete("/items/:id", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Clothing API listening at http://localhost:${port}`);
+  console.log(
+    `Clothing API listening at http://localhost:${port}`
+  );
 });
