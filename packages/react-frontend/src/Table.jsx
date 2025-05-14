@@ -34,7 +34,7 @@
 // export default Table;
 
 import React from "react";
-import "./Grid.css"; // import the CSS
+import "./Grid.css"; 
 
 function Grid() {
   const closet = [
