@@ -1,117 +1,93 @@
+// backend.js
 import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
+import mongoose from "mongoose";
+import clothingItemService from "./services/clothingItem-service.js";
 
-const users = {
-  users_list: [
-    {
-      id: "xyz789",
-      name: "Charlie",
-      job: "Janitor"
-    },
-    {
-      id: "abc123",
-      name: "Mac",
-      job: "Bouncer"
-    },
-    {
-      id: "ppp222",
-      name: "Mac",
-      job: "Professor"
-    },
-    {
-      id: "yat999",
-      name: "Dee",
-      job: "Aspring actress"
-    },
-    {
-      id: "zap555",
-      name: "Dennis",
-      job: "Bartender"
-    }
-  ]
-};
+const {
+  getClothingItems,
+  getClothingItemById,
+  addClothingItem,
+  deleteClothingItemById,
+  toggleFavoriteStatus
+} = clothingItemService;
 
-const findUserByName = (name) => {
-  return users["users_list"].filter(
-    (user) => user["name"] === name
-  );
-};
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, "mongo.env") });
 
-const findUserByJob = (job) => {
-  return users["users_list"].filter(
-    (user) => user["job"] === job
-  );
-};
+const { MONGO_CONNECTION_STRING } = process.env;
 
-const findUserById = (id) =>
-  users["users_list"].find((user) => user["id"] === id);
-
-const addUser = (user) => {
-  users["users_list"].push(user);
-  return user;
-};
-
-const delUser = (user) => {
-  const index = users["users_list"].indexOf(user);
-  if (index != -1) {
-    users["users_list"].splice(index, 1);
-  }
-};
+mongoose.set("debug", true);
+mongoose
+  .connect(MONGO_CONNECTION_STRING + "clothes") // connect to Db "closet"
+  .catch((error) => console.log(error));
 
 const app = express();
 const port = 8000;
-
+app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+/** Get one item by its Mongo _id */
+app.get("/items/:id", (req, res) => {
+  getClothingItemById(req.params.id)
+    .then((item) => {
+      if (!item) {
+        return res.status(404).send("Resource not found.");
+      }
+      res.json(item);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    });
 });
 
-app.get("/users", (req, res) => {
-  const name = req.query.name;
-  const job = req.query.job;
+/** List items (optionally filter by user_id) */
+app.get("/items", (req, res) => {
+  const filter = {};
+  if (req.query.user_id) filter.user_id = req.query.user_id;
 
-  if (name != undefined) {
-    let result = findUserByName(name);
-    result = { users_list: result };
-    res.send(result);
-  } else if (job != undefined) {
-    let result = findUserByJob(job);
-    result = { users_list: result };
-    res.send(result);
-  } else {
-    res.send(users);
-  }
+  getClothingItems(filter)
+    .then((itemsList) => {
+      res.json({ items_list: itemsList });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    });
 });
 
-app.get("/users/:id", (req, res) => {
-  const id = req.params["id"]; //or req.params.id
-  let result = findUserById(id);
-  if (result === undefined) {
-    res.status(404).send("Resource not found.");
-  } else {
-    res.send(result);
-  }
+/** Create a new clothing item */
+app.post("/items", (req, res) => {
+  addClothingItem(req.body)
+    .then((saved) => {
+      res.status(201).json(saved);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(400).json({ error: err.message });
+    });
 });
 
-app.post("/users", (req, res) => {
-  const userToAdd = req.body;
-  addUser(userToAdd);
-  res.send();
-});
-
-app.delete("/users/:id", (req, res) => {
-  const id = req.params["id"];
-  let user = findUserById(id);
-  if (user === undefined) {
-    res.status(404).send("Resource not found.");
-  } else {
-    delUser(user);
-    res.status(204).send();
-  }
+/** Delete an item by its Mongo _id */
+app.delete("/items/:id", (req, res) => {
+  deleteClothingItemById(req.params.id)
+    .then((deleted) => {
+      if (!deleted)
+        return res.status(404).send("Item not found");
+      res.status(204).end();
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Server error" });
+    });
 });
 
 app.listen(port, () => {
   console.log(
-    `Example app listening at http://localhost:${port}`
+    `Clothing API listening at http://localhost:${port}`
   );
 });
