@@ -19,6 +19,9 @@ function NavBar() {
                         <li class="md:hidden">
                             <Link to="/auth" class="text-xl font-bold">Sign In</Link>
                         </li>
+                        <li>
+                            <Link to="/upload" class="text-xl font-bold">Upload Item</Link>
+                        </li>                        
                     </ul>
                 </div>
                 <div class="hidden md:flex items-center gap-8">
