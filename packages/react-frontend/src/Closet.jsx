@@ -38,6 +38,8 @@ function Closet() {
             {/* ID area */}
             <div className="flex-1 flex items-center justify-center bg-gray-100">
               <strong className="text-sm">{item.item_id || item._id}</strong>
+              <strong className="text-sm">{item.item_color || item._id}</strong>
+              
             </div>
           </div>
         ))}
