@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
+import View from "./View";
 
 function Closet() {
   const [closet, setCloset] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isViewOpen, setIsViewOpen] = useState(false);
+  
+  const openView = () => {
+    setIsViewOpen(true);
+  }
+  const closeView = () => {
+    setIsViewOpen(false);
+  }
 
   useEffect(() => {
     fetch("http://localhost:8000/items")
@@ -28,6 +37,7 @@ function Closet() {
           <div
             key={item._id}
             className="flex flex-col bg-gray-200 rounded-lg shadow overflow-hidden w-50 h-50"
+            onClick={openView}
           >
             {/* Image area */}
             <img
@@ -38,11 +48,12 @@ function Closet() {
             {/* ID area */}
             <div className="flex-1 flex items-center justify-center bg-gray-100">
               <strong className="text-sm">{item.item_id || item._id}</strong>
-              <strong className="text-sm">{item.item_color}</strong>
+              <strong className="text-sm">{item.item_color || item._id}</strong>
             </div>
           </div>
         ))}
       </div>
+      <View isOpen={isViewOpen} onClose={closeView} />
     </div>
   );
 }
