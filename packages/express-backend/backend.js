@@ -46,7 +46,7 @@ app.get("/items/:id", (req, res) => {
 });
 
 /** List items (optionally filter by user_id) */
-app.get("/items", (req, res) => {
+app.get("/items", (req, res) => {  // /items shows clothing_items
   const filter = {};
   if (req.query.user_id) filter.user_id = req.query.user_id;
 
