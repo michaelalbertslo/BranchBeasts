@@ -1,27 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 function Closet() {
-  const closet = [
-    { box : "1"},
-    { box : "2"},
-    { box : "3"},
-    { box : "4"},
-    { box : "5"},
-    { box : "6"},
-    { box : "7"},
-    { box : "8"},
-    { box : "9"},
-    { box : "10"},
-    { box : "11"},
-    { box : "12"},
-  ];
+  const [closet, setCloset] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/items")
+      .then(res => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then(data => setCloset(data.items_list))
+      .catch(err => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading) return <p className="text-center py-5">Loading...</p>;
+  if (error)   return <p className="text-center py-5 text-red-500">Error: {error}</p>;
+  if (!closet.length) return <p className="text-center py-5">No items found.</p>;
 
   return (
     <div className="flex justify-center py-5">
-      <div className="grid lg:grid-cols-12 grid-cols-6 gap-4">
-        {closet.map((clothing, index) => (
-          <div className="flex justify-center items-center bg-gray-400 w-20 h-20" key={index}>
-            <strong>{clothing.box}</strong>
+      {/* 5 columns grid */}
+      <div className="grid grid-cols-5 gap-4">
+        {closet.map(item => (
+          <div
+            key={item._id}
+            className="flex flex-col bg-gray-200 rounded-lg shadow overflow-hidden w-32 h-40"
+          >
+            {/* Image area */}
+            <img
+              src={item.image_url}
+              alt={item.type || "clothing item"}
+              className="w-full h-24 object-cover"
+            />
+            {/* ID area */}
+            <div className="flex-1 flex items-center justify-center bg-gray-100">
+              <strong className="text-sm">{item.item_id || item._id}</strong>
+              <strong className="text-sm">{item.item_color || item._id}</strong>
+              
+            </div>
           </div>
         ))}
       </div>
