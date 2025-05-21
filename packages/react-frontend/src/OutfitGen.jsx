@@ -132,6 +132,7 @@ function OutfitGen() {
       </div>
     </div>
   );
+  return <div className="flex justify-center"></div>;
 }
 
 export default OutfitGen;
