@@ -6,6 +6,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import clothingItemService from "./services/clothingItem-service.js";
+import UserService from "./services/User-service.js";
+
+
+// dotenv.config()
 
 const {
   getClothingItems,
@@ -17,6 +21,8 @@ const {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "mongo.env") });
+// dotenv.config( { path: path.join(__dirname, ".env" )})
+
 
 const { MONGO_CONNECTION_STRING } = process.env;
 
@@ -85,6 +91,38 @@ app.delete("/items/:id", (req, res) => {
       res.status(500).json({ error: "Server error" });
     });
 });
+
+
+
+app.get("/users", (req, res) => {
+  const name = req.query.name;
+  const username = req.query.username;
+  let query;
+  if (name != undefined && username === undefined) {
+    query = UserService.getUserByName(name);
+  } 
+  else if (username != undefined && name === undefined) {
+    query = UserService.getUserByUserName(username);
+  }
+  else if (username != undefined && name != undefined) {
+    query = UserService.getUserByNameAndUserName(name, username);
+  }
+  else {
+    query = UserService.getUsers();
+  }
+  query.then(users => res.send({ users_list: users }))
+  .catch(err => res.status(500).send(err.message));
+});
+
+
+
+app.post("/users", (req, res) => {
+  const userToAdd = req.body;
+  UserService.addUser(userToAdd)
+  .then(savedUser => res.status(201).send(savedUser))
+  .catch(err => res.status(400).send(err.message))
+});
+
 
 app.listen(port, () => {
   console.log(
