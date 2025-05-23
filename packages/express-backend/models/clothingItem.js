@@ -7,6 +7,12 @@ const ClosetItemSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
+    item_name: {
+      type: String,
+      required: true,
+      trim: true,
+      unique: false
+    },
     item_id: {
       type: String,
       required: true,
@@ -27,7 +33,7 @@ const ClosetItemSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      enum: ["XS", "S", "M", "L", "XL", "XXL"] // optional validation
+      enum: ["XS", "S", "M", "L", "XL", "XXL"] 
     },
     favorited: {
       type: Boolean,
@@ -45,7 +51,12 @@ const ClosetItemSchema = new mongoose.Schema(
         },
         message: "Invalid image URL format."
       }
-    }
+    },
+    description: {
+      type: String,
+      trim: true,
+      required: false,
+    },
   },
   { collection: "closet_items" }
 );
