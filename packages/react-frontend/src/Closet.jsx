@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import View from "./View";
 
-function Closet() {
+function Closet({ addAuthHeader }) {
   const [closet, setCloset] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -15,7 +15,10 @@ function Closet() {
   }
 
   useEffect(() => {
-    fetch("http://localhost:8000/items")
+    fetch("http://localhost:8000/items", {
+      method: "GET",
+      headers: addAuthHeader()
+    })
       .then(res => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
