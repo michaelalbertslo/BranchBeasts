@@ -6,10 +6,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import clothingItemService from "./services/clothingItem-service.js";
+import { registerUser, loginUser, authenticateUser } from "./auth.js";
 import UserService from "./services/User-service.js";
 
-
-// dotenv.config()
 
 const {
   getClothingItems,
@@ -35,6 +34,8 @@ const app = express();
 const port = 8000;
 app.use(cors());
 app.use(express.json());
+app.post("/signup", registerUser);
+app.post("/login", loginUser);
 
 /** Get one item by its Mongo _id */
 app.get("/items/:id", (req, res) => {
@@ -52,7 +53,7 @@ app.get("/items/:id", (req, res) => {
 });
 
 /** List items (optionally filter by user_id) */
-app.get("/items", (req, res) => {  // /items shows clothing_items
+app.get("/items", authenticateUser, (req, res) => {  // /items shows clothing_items
   const filter = {};
   if (req.query.user_id) filter.user_id = req.query.user_id;
 
@@ -67,7 +68,7 @@ app.get("/items", (req, res) => {  // /items shows clothing_items
 });
 
 /** Create a new clothing item */
-app.post("/items", (req, res) => {
+app.post("/items", authenticateUser, (req, res) => {
   addClothingItem(req.body)
     .then((saved) => {
       res.status(201).json(saved);
@@ -79,7 +80,7 @@ app.post("/items", (req, res) => {
 });
 
 /** Delete an item by its Mongo _id */
-app.delete("/items/:id", (req, res) => {
+app.delete("/items/:id", authenticateUser, (req, res) => {
   deleteClothingItemById(req.params.id)
     .then((deleted) => {
       if (!deleted)
