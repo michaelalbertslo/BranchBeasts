@@ -28,7 +28,7 @@ function Upload() {
       const res = await fetch(`${SERVER_ORIGIN}/items`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payload)
       });
       if (!res.ok) {
         const err = await res.json();
@@ -76,9 +76,9 @@ function Upload() {
           method: "POST",
           headers: {
             "Content-Type": type,
-            "Content-Length": size.toString(),
+            "Content-Length": size.toString()
           },
-          body: buffer,
+          body: buffer
         });
       })
       .then((res) => {
@@ -98,8 +98,7 @@ function Upload() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-6 rounded-lg shadow"
-      >
+        className="w-full max-w-md bg-white p-6 rounded-lg shadow">
         <h2 className="text-2xl font-semibold mb-4 text-center">
           Upload Closet Item
         </h2>
@@ -107,8 +106,7 @@ function Upload() {
         <div className="mb-4">
           <label
             htmlFor="itemname"
-            className="block text-gray-700 font-medium mb-1"
-          >
+            className="block text-gray-700 font-medium mb-1">
             Item Name
           </label>
           <input
@@ -124,8 +122,7 @@ function Upload() {
         <div className="mb-4">
           <label
             htmlFor="description"
-            className="block text-gray-700 font-medium mb-1"
-          >
+            className="block text-gray-700 font-medium mb-1">
             Description
           </label>
           <input
@@ -145,8 +142,7 @@ function Upload() {
             <select
               value={color}
               onChange={(e) => setColor(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring"
-            >
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring">
               {[
                 "red",
                 "orange",
@@ -157,7 +153,7 @@ function Upload() {
                 "violet",
                 "black",
                 "white",
-                "grey",
+                "grey"
               ].map((c) => (
                 <option key={c} value={c}>
                   {c}
@@ -173,15 +169,19 @@ function Upload() {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring"
-            >
-              {["hat", "jacket", "shirt", "pants", "socks", "shoes"].map(
-                (t) => (
-                  <option key={t} value={t}>
-                    {t}
-                  </option>
-                )
-              )}
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring">
+              {[
+                "hat",
+                "jacket",
+                "shirt",
+                "pants",
+                "socks",
+                "shoes"
+              ].map((t) => (
+                <option key={t} value={t}>
+                  {t}
+                </option>
+              ))}
             </select>
           </div>
         </div>
@@ -194,8 +194,7 @@ function Upload() {
             <select
               value={size}
               onChange={(e) => setSize(e.target.value)}
-              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring"
-            >
+              className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring">
               {["XS", "S", "M", "L", "XL"].map((s) => (
                 <option key={s} value={s}>
                   {s}
@@ -212,7 +211,9 @@ function Upload() {
               onChange={(e) => setIsFavorite(e.target.checked)}
               className="mr-2"
             />
-            <label htmlFor="favorite" className="text-gray-700 font-medium">
+            <label
+              htmlFor="favorite"
+              className="text-gray-700 font-medium">
               Favorite
             </label>
           </div>
@@ -230,7 +231,7 @@ function Upload() {
           />
           {photo && (
             <p className="mt-2 text-green-600 text-sm">
-              Image uploaded 
+              Image uploaded
             </p>
           )}
         </div>
@@ -238,8 +239,7 @@ function Upload() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
+          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
           {loading ? "Submitting…" : "Submit"}
         </button>
       </form>

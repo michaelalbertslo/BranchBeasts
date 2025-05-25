@@ -7,9 +7,9 @@ const ClosetUserSchema = new mongoose.Schema(
     //   lastName: { type: String, required: true, trim: true },
     // },
     name: {
-        type: String,
-        required: true,
-        trim: true
+      type: String,
+      required: true,
+      trim: true
     },
     username: {
       type: String,
@@ -25,15 +25,12 @@ const ClosetUserSchema = new mongoose.Schema(
     },
     passwordToken: {
       type: String,
-      required: true,
+      required: true
     }
   },
   { collection: "users" }
 );
 
-const User = mongoose.model(
-  "User",
-  ClosetUserSchema
-)
+const User = mongoose.model("User", ClosetUserSchema);
 
 export default User;

@@ -6,10 +6,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import clothingItemService from "./services/clothingItem-service.js";
-import { registerUser, loginUser, authenticateUser } from "./auth.js";
+import {
+  registerUser,
+  loginUser,
+  authenticateUser
+} from "./auth.js";
 import UserService from "./services/User-service.js";
 import { uploadImage } from "./services/azure-blob.js";
-
 
 const {
   getClothingItems,
@@ -37,23 +40,27 @@ app.post("/signup", registerUser);
 app.post("/login", loginUser);
 
 //image uploading to Azure endpoint
-app.post("/images", express.raw({ type: "*/*", limit: "10mb" }),
-async (req, res) => {
-  try {
-    const filename = req.query.filename;
-    if (!filename) {
-      return res.status(400).json({ error: "Missing ?filename query param" });
-    }
-    const mimeType = req.headers["content-type"];
-    const buffer = req.body; // Buffer of file bytes
+app.post(
+  "/images",
+  express.raw({ type: "*/*", limit: "10mb" }),
+  async (req, res) => {
+    try {
+      const filename = req.query.filename;
+      if (!filename) {
+        return res
+          .status(400)
+          .json({ error: "Missing ?filename query param" });
+      }
+      const mimeType = req.headers["content-type"];
+      const buffer = req.body; // Buffer of file bytes
 
-    const url = await uploadImage(buffer, filename, mimeType);
-    res.status(201).json({ url });
-  } catch (err) {
-    console.error("Upload failed:", err);
-    res.status(500).json({ error: err.message });
+      const url = await uploadImage(buffer, filename, mimeType);
+      res.status(201).json({ url });
+    } catch (err) {
+      console.error("Upload failed:", err);
+      res.status(500).json({ error: err.message });
+    }
   }
-}
 );
 
 // fetch one item by ID
@@ -72,7 +79,8 @@ app.get("/items/:id", (req, res) => {
 });
 
 /** List items (optionally filter by user_id) */
-app.get("/items",  (req, res) => {  // /items shows clothing_items
+app.get("/items", (req, res) => {
+  // /items shows clothing_items
   const filter = {};
   if (req.query.user_id) filter.user_id = req.query.user_id;
 
@@ -102,13 +110,13 @@ app.post("/items", async (req, res) => {
     const newItem = {
       user_id: "00", //get from user that is currently logged in
       item_name: itemName,
-      item_id: "001112",  //randomly generate with some params
+      item_id: "001112", //randomly generate with some params
       color,
       type,
       size,
       favorited: isFavorite,
       image_url: photo,
-      description,
+      description
     };
     const saved = await addClothingItem(newItem);
     res.status(201).json(saved);
@@ -119,7 +127,7 @@ app.post("/items", async (req, res) => {
 });
 
 /** Delete an item by its Mongo _id */
-app.delete("/items/:id",  (req, res) => {
+app.delete("/items/:id", (req, res) => {
   deleteClothingItemById(req.params.id)
     .then((deleted) => {
       if (!deleted)
@@ -132,37 +140,33 @@ app.delete("/items/:id",  (req, res) => {
     });
 });
 
-
-
 app.get("/users", (req, res) => {
   const name = req.query.name;
   const username = req.query.username;
   let query;
   if (name != undefined && username === undefined) {
     query = UserService.getUserByName(name);
-  } 
-  else if (username != undefined && name === undefined) {
+  } else if (username != undefined && name === undefined) {
     query = UserService.getUserByUserName(username);
-  }
-  else if (username != undefined && name != undefined) {
-    query = UserService.getUserByNameAndUserName(name, username);
-  }
-  else {
+  } else if (username != undefined && name != undefined) {
+    query = UserService.getUserByNameAndUserName(
+      name,
+      username
+    );
+  } else {
     query = UserService.getUsers();
   }
-  query.then(users => res.send({ users_list: users }))
-  .catch(err => res.status(500).send(err.message));
+  query
+    .then((users) => res.send({ users_list: users }))
+    .catch((err) => res.status(500).send(err.message));
 });
-
-
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
   UserService.addUser(userToAdd)
-  .then(savedUser => res.status(201).send(savedUser))
-  .catch(err => res.status(400).send(err.message))
+    .then((savedUser) => res.status(201).send(savedUser))
+    .catch((err) => res.status(400).send(err.message));
 });
-
 
 app.listen(port, () => {
   console.log(

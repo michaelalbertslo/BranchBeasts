@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function Outfits() {
   const closet = [
@@ -29,7 +29,10 @@ function Outfits() {
     <div className="flex justify-center py-5">
       <div className="grid lg:grid-cols-12 grid-cols-6 gap-4">
         {closet.map((clothing, index) => (
-          <Link to="/outfit-gen" className="flex justify-center items-center bg-gray-400 w-20 h-20" key={index}>
+          <Link
+            to="/outfit-gen"
+            className="flex justify-center items-center bg-gray-400 w-20 h-20"
+            key={index}>
             <strong>{clothing.box}</strong>
           </Link>
         ))}
