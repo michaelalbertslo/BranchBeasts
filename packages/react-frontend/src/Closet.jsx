@@ -39,14 +39,14 @@ function Closet({ addAuthHeader }) {
         {closet.map(item => (
           <div
             key={item._id}
-            className="flex flex-col bg-gray-200 rounded-lg shadow overflow-hidden w-32 h-40"
+            className="flex flex-col bg-gray-200 rounded-lg shadow overflow-hidden w-50 h-50"
             onClick={openView}
           >
             {/* Image area */}
             <img
               src={item.image_url}
               alt={item.type || "clothing item"}
-              className="w-full h-24 object-cover"
+              className="w-full h-full object-cover"
             />
             {/* ID area */}
             <div className="flex-1 flex items-center justify-center bg-gray-100">
