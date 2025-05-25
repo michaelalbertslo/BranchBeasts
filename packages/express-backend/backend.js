@@ -26,7 +26,7 @@ const { MONGO_CONNECTION_STRING } = process.env;
 
 mongoose.set("debug", true);
 mongoose
-  .connect(MONGO_CONNECTION_STRING + "clothes") // connect to Db "closet"
+  .connect(MONGO_CONNECTION_STRING + "clothes") // connect to Db "clothes"
   .catch((error) => console.log(error));
 
 const app = express();
@@ -72,7 +72,7 @@ app.get("/items/:id", (req, res) => {
 });
 
 /** List items (optionally filter by user_id) */
-app.get("/items", authenticateUser, (req, res) => {  // /items shows clothing_items
+app.get("/items",  (req, res) => {  // /items shows clothing_items
   const filter = {};
   if (req.query.user_id) filter.user_id = req.query.user_id;
 
@@ -102,7 +102,7 @@ app.post("/items", async (req, res) => {
     const newItem = {
       user_id: "00", //get from user that is currently logged in
       item_name: itemName,
-      item_id: "001111",  //randomly generate with some params
+      item_id: "001112",  //randomly generate with some params
       color,
       type,
       size,
@@ -119,7 +119,7 @@ app.post("/items", async (req, res) => {
 });
 
 /** Delete an item by its Mongo _id */
-app.delete("/items/:id", authenticateUser, (req, res) => {
+app.delete("/items/:id",  (req, res) => {
   deleteClothingItemById(req.params.id)
     .then((deleted) => {
       if (!deleted)
