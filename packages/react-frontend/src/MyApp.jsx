@@ -11,7 +11,8 @@ import Auth from "./Auth";
 import OutfitGen from "./OutfitGen";
 import Upload from "./Upload";
 import View from "./View";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Login from "./Login";
 
 
@@ -19,6 +20,13 @@ function MyApp() {
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
+
+  const location = useLocation();
+  
+  useEffect(() => {
+    setMessage(""); // clear the message when the path changes
+  }, [location.pathname]);
+
 
   function loginUser(creds) {
     fetch("http://localhost:8000/login", {
@@ -74,23 +82,22 @@ function signupUser(creds) {
 
 
   return (
-    <Router>
-      <div>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
-          <Route path="/outfits" element={<Outfits />} />
-          <Route path="/auth" element={<Auth />} />
-          <Route path="/outfit-gen" element={<OutfitGen />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/view" element={<View />} />
-          <Route path="/login" element={<Login handleSubmit={loginUser} />} />
-          <Route path="/signup" element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />} />
-        </Routes>
-        <p>{message}</p>
-      </div>
-    </Router>
-  );
+  <div>
+    <NavBar />
+    <Routes>
+      <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
+      <Route path="/outfits" element={<Outfits />} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/outfit-gen" element={<OutfitGen />} />
+      <Route path="/upload" element={<Upload />} />
+      <Route path="/view" element={<View />} />
+      <Route path="/login" element={<Login handleSubmit={loginUser} />} />
+      <Route path="/signup" element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />} />
+    </Routes>
+    <p>{message}</p>
+  </div>
+);
+
 }
 
 
