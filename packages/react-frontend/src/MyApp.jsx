@@ -7,7 +7,6 @@ import {
 import Closet from "./Closet";
 import NavBar from "./NavBar";
 import Outfits from "./Outfits";
-import Auth from "./Auth";
 import OutfitGen from "./OutfitGen";
 import Upload from "./Upload";
 import View from "./View";
