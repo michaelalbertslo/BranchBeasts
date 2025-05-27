@@ -23,11 +23,6 @@ function NavBar() {
                 MyOutfits
               </Link>
             </li>
-            <li class="md:hidden">
-              <Link to="/auth" class="text-xl font-bold">
-                Sign In
-              </Link>
-            </li>
             <li>
               <Link to="/upload" class="text-xl font-bold">
                 Upload Item
@@ -36,8 +31,8 @@ function NavBar() {
           </ul>
         </div>
         <div class="hidden md:flex items-center gap-8">
-          <Link to="/auth" class="text-xl font-bold">
-            Sign In
+          <Link to="/login" class="text-xl font-bold">
+            Log In / Sign Up
           </Link>
         </div>
       </nav>

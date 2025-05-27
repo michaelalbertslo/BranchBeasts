@@ -87,7 +87,6 @@ function signupUser(creds) {
     <Routes>
       <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
       <Route path="/outfits" element={<Outfits />} />
-      <Route path="/auth" element={<Auth />} />
       <Route path="/outfit-gen" element={<OutfitGen />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/view" element={<View />} />
