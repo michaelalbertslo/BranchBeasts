@@ -33,7 +33,7 @@ const ClosetItemSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      enum: ["XS", "S", "M", "L", "XL", "XXL"] 
+      enum: ["XS", "S", "M", "L", "XL", "XXL"]
     },
     favorited: {
       type: Boolean,
@@ -55,8 +55,8 @@ const ClosetItemSchema = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      required: false,
-    },
+      required: false
+    }
   },
   { collection: "closet_items" }
 );

@@ -5,58 +5,53 @@ function Closet({ addAuthHeader }) {
   const [closet, setCloset] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isViewOpen, setIsViewOpen] = useState(false);
-  
-  const openView = () => {
-    setIsViewOpen(true);
-  }
-  const closeView = () => {
-    setIsViewOpen(false);
-  }
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const openView = (item) => setSelectedItem(item);
+  const closeView = () => setSelectedItem(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/items", {
       method: "GET",
       headers: addAuthHeader()
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) throw new Error("Network response was not ok");
         return res.json();
       })
-      .then(data => setCloset(data.items_list))
-      .catch(err => setError(err.message))
+      .then((data) => setCloset(data.items_list))
+      .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="text-center py-5">Loading...</p>;
-  if (error)   return <p className="text-center py-5 text-red-500">Error: {error}</p>;
-  if (!closet.length) return <p className="text-center py-5">No items found.</p>;
+  if (loading)
+    return <p className="text-center py-10 text-xl font-medium">Loading...</p>;
+  if (error)
+    return <p className="text-center py-10 text-red-500 font-medium">Error: {error}</p>;
+  if (!closet.length)
+    return <p className="text-center py-10 text-xl">No items found.</p>;
 
   return (
-    <div className="flex justify-center py-5">
-      {/* 5 columns grid */}
-      <div className="grid grid-cols-5 gap-4">
-        {closet.map(item => (
+    <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+        {closet.map((item) => (
           <div
             key={item._id}
-            className="flex flex-col bg-gray-200 rounded-lg shadow overflow-hidden w-50 h-50"
-            onClick={openView}
+            className="group relative bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 aspect-square"
+            onClick={() => openView(item)}
           >
-            {/* Image area */}
             <img
               src={item.image_url}
               alt={item.type || "clothing item"}
               className="w-full h-full object-cover"
             />
-            {/* ID area */}
-            <div className="flex-1 flex items-center justify-center bg-gray-100">
-              <strong className="text-sm">{item.item_id || item._id}</strong>
-              <strong className="text-sm">{item.item_color || item._id}</strong>
-            </div>
           </div>
         ))}
       </div>
-      <View isOpen={isViewOpen} onClose={closeView} />
+
+      {selectedItem && (
+        <View isOpen={true} onClose={closeView} item={selectedItem} />
+      )}
     </div>
   );
 }

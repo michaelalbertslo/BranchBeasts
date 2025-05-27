@@ -7,7 +7,6 @@ import {
 import Closet from "./Closet";
 import NavBar from "./NavBar";
 import Outfits from "./Outfits";
-import Auth from "./Auth";
 import OutfitGen from "./OutfitGen";
 import Upload from "./Upload";
 import View from "./View";
@@ -87,7 +86,6 @@ function signupUser(creds) {
     <Routes>
       <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
       <Route path="/outfits" element={<Outfits />} />
-      <Route path="/auth" element={<Auth />} />
       <Route path="/outfit-gen" element={<OutfitGen />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/view" element={<View />} />
