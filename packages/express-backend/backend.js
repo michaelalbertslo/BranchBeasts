@@ -5,6 +5,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
+import uuidv4 from "uuid"
 import clothingItemService from "./services/clothingItem-service.js";
 import {
   registerUser,
@@ -110,7 +111,7 @@ app.post("/items", async (req, res) => {
     const newItem = {
       user_id: "00", //get from user that is currently logged in
       item_name: itemName,
-      item_id: "001112", //randomly generate with some params
+      item_id: uuidv4(), //randomly generate with some params
       color,
       type,
       size,
