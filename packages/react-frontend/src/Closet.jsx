@@ -22,7 +22,7 @@ function Closet({ addAuthHeader }) {
       .then((data) => setCloset(data.items_list))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, []);
+  }, [addAuthHeader]);
 
   if (loading)
     return <p className="text-center py-10 text-xl font-medium">Loading...</p>;
