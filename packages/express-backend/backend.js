@@ -168,8 +168,8 @@ app.post("/users", (req, res) => {
     .catch((err) => res.status(400).send(err.message));
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || port, () => {
   console.log(
-    `Clothing API listening at http://localhost:${port}`
+    `REST API Is Listening`
   );
 });
