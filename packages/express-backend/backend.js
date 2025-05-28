@@ -19,6 +19,16 @@ const {
   toggleFavoriteStatus
 } = clothingItemService;
 
+const {
+  getUsers,
+  getUserById,
+  getUserByName,
+  getUserByUserName,
+  getUserByNameAndUserName,
+  addUser,
+  delUser,
+} = UserService
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "mongo.env") });
 // dotenv.config( { path: path.join(__dirname, ".env" )})
@@ -99,16 +109,16 @@ app.get("/users", (req, res) => {
   const username = req.query.username;
   let query;
   if (name != undefined && username === undefined) {
-    query = UserService.getUserByName(name);
+    query = getUserByName(name);
   } 
   else if (username != undefined && name === undefined) {
-    query = UserService.getUserByUserName(username);
+    query = getUserByUserName(username);
   }
   else if (username != undefined && name != undefined) {
-    query = UserService.getUserByNameAndUserName(name, username);
+    query = getUserByNameAndUserName(name, username);
   }
   else {
-    query = UserService.getUsers();
+    query = getUsers();
   }
   query.then(users => res.send({ users_list: users }))
   .catch(err => res.status(500).send(err.message));
@@ -118,10 +128,24 @@ app.get("/users", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  UserService.addUser(userToAdd)
+  addUser(userToAdd)
   .then(savedUser => res.status(201).send(savedUser))
   .catch(err => res.status(400).send(err.message))
 });
+
+app.delete("/users/:id", (req, res) => {
+  const id = req.params["id"];
+  delUser(id)
+  .then(deleteUser => {
+    if (deleteUser === undefined) 
+      return res.status(404).send();
+  else
+    return res.status(204).send();
+  })
+  .catch((err) => {
+    console.error(err);
+  res.status(500).send(err.message)
+})});
 
 
 app.listen(port, () => {

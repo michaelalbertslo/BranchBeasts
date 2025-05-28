@@ -53,6 +53,9 @@ function addUser(user) {
     return promise;
   }
 
+  function delUser(id) {
+    return userModel.findByIdAndDelete(id);
+}
 
 export default {
   getUsers,
@@ -61,4 +64,5 @@ export default {
   getUserByUserName,
   getUserByNameAndUserName,
   addUser,
+  delUser,
 };
