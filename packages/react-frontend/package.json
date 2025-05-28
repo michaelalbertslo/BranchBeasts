@@ -15,8 +15,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "react-router-dom": "^7.6.0",
-    "tailwindcss": "^4.1.8"
+    "react-router-dom": "^7.6.1",
+    "tailwindcss": "^4.1.6"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
@@ -31,5 +31,9 @@
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.0.0",
     "vite": "^6.3.5"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.41.1",
+    "@parcel/watcher-linux-x64-glibc": "^2.0.0"
   }
 }

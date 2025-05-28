@@ -4,7 +4,8 @@
   "type": "module",
   "main": "backend.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\"",
+    "lint": "eslint .",
     "dev": "npx nodemon backend.js",
     "start": "node backend.js"
   },
@@ -12,9 +13,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@azure/storage-blob": "^12.27.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "mongoose": "^8.14.2"
+    "mongoose": "^8.14.2",
+    "multer": "^2.0.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.9",
