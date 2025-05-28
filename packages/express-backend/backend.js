@@ -5,7 +5,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
-import uuidv4 from "uuid"
+import { uuidv4 } from 'uuidv4';
 import clothingItemService from "./services/clothingItem-service.js";
 import {
   registerUser,
