@@ -33,6 +33,7 @@
     "vite": "^6.3.5"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.41.1"
+    "@rollup/rollup-linux-x64-gnu": "^4.41.1",
+    "@parcel/watcher-linux-x64-glibc": "^2.0.0"
   }
 }
