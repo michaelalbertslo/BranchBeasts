@@ -24,6 +24,11 @@ function Closet({ addAuthHeader }) {
       .finally(() => setLoading(false));
   }, [addAuthHeader]);
 
+  // called by View when DELETE succeeds
+  const handleDeleted = (deletedId) => {
+    setCloset((prev) => prev.filter((it) => it._id !== deletedId));
+  };
+
   if (loading)
     return <p className="text-center py-10 text-xl font-medium">Loading...</p>;
   if (error)
@@ -50,7 +55,13 @@ function Closet({ addAuthHeader }) {
       </div>
 
       {selectedItem && (
-        <View isOpen={true} onClose={closeView} item={selectedItem} />
+        <View
+          isOpen={true}
+          onClose={closeView}
+          item={selectedItem}
+          onDeleted={handleDeleted}    // ← pass the delete‐callback here
+          addAuthHeader={addAuthHeader}
+        />
       )}
     </div>
   );
