@@ -1,4 +1,5 @@
 import React from "react";
+import { API_BASE_URL } from "./azure";
 
 function View({ isOpen, onClose, item, onDeleted, addAuthHeader }) {
   if (!item) return null;
@@ -6,7 +7,7 @@ function View({ isOpen, onClose, item, onDeleted, addAuthHeader }) {
 
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:8000/items/${item._id}`, {
+      const res = await fetch(`${API_BASE_URL}/items/${item._id}`, {
         method: "DELETE",
         header: addAuthHeader(),
       });

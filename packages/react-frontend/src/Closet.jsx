@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import View from "./View";
+import { API_BASE_URL } from "./azure";
 
 function Closet({ addAuthHeader }) {
   const [closet, setCloset] = useState([]);
@@ -11,7 +12,7 @@ function Closet({ addAuthHeader }) {
   const closeView = () => setSelectedItem(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/items", {
+    fetch(`${API_BASE_URL}/items`, {
       method: "GET",
       headers: addAuthHeader()
     })
