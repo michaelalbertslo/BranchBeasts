@@ -13,6 +13,7 @@ import {
 } from "./auth.js";
 import UserService from "./services/User-service.js";
 import { uploadImage } from "./services/azure-blob.js";
+import outfitService from "./services/outfits-service.js";
 
 const {
   getClothingItems,
@@ -31,6 +32,14 @@ const {
   addUser,
   delUser,
 } = UserService
+
+const {
+  getOutfitItems,
+  getOutfitItemById,
+  addOutfitItem,
+  deleteOutfitItemById,
+  // updateOutfitItem,
+} = outfitService
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "mongo.env") });
@@ -190,6 +199,48 @@ app.delete("/users/:id", (req, res) => {
   .catch((err) => {
     console.error(err);
   res.status(500).send(err.message)
+})});
+
+app.get("/outfits", (req, res) => {
+  getOutfitItems()
+  .then((outfitItems) => res.send({ outfits: outfitItems }))
+  .catch((err) => res.status(500).send(err.message));
+})
+
+app.get("/outfits/:id", (req, res) => {
+  const id = req.params["id"]; 
+  getOutfitItemById(id)
+  .then(result => {
+    if (result === undefined) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.send(result);
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send(err.message)
+  })});
+
+app.post("/outfits", (req, res) => {
+  const outfitToAdd = req.body;
+  addOutfitItem(outfitToAdd)
+  .then(savedFit => res.status(201).send(savedFit))
+  .catch(err => res.status(400).send(err.message))
+});
+
+app.delete("/outfits/:id", (req, res) => {
+  const id = req.params["id"];
+  deleteOutfitItemById(id)
+  .then(deleteOutfit => {
+    if (deleteOutfit === undefined) 
+      return res.status(404).send();
+  else
+    return res.status(204).send();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send(err.message)
 })});
 
 

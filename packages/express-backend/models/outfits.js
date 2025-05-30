@@ -6,14 +6,12 @@ const outfitSchema = new mongoose.Schema(
         id: 
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             },
         image:
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             }
@@ -23,14 +21,12 @@ const outfitSchema = new mongoose.Schema(
         id: 
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             },
         image:
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             }
@@ -40,14 +36,12 @@ const outfitSchema = new mongoose.Schema(
         id: 
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             },
         image:
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             }
@@ -57,14 +51,12 @@ const outfitSchema = new mongoose.Schema(
         id: 
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             },
         image:
             {
                 type: String,
-                required: true,
                 trim: true,
                 default: null
             }
