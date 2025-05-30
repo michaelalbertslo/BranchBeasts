@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const ClosetUserSchema = new mongoose.Schema(
   {
-    // name: {
-    //   firstName: { type: String, required: true, trim: true },
-    //   lastName: { type: String, required: true, trim: true },
-    // },
     name: {
       type: String,
       required: true,
