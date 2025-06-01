@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import View from "./View";
 import { API_BASE_URL } from "./azure";
 
-
 function Outfit({ addAuthHeader }) {
   const [outfits, setOutfits] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,29 +12,35 @@ function Outfit({ addAuthHeader }) {
   const closeView = () => setSelectedItem(null);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/closet`, {
+    fetch(`${API_BASE_URL}/outfits`, {
       method: "GET",
-      headers: addAuthHeader(),
+      headers: addAuthHeader()
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
+        if (!res.ok)
+          throw new Error("Network response was not ok");
         return res.json();
       })
-      .then((data) => setOutfits(data.items_list))
+      .then((data) => {
+        setOutfits(data.outfits);
+        console.log("Fetched outfits data:", data);
+      })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
   }, []);
 
   if (loading)
-    return <p className="text-center py-10 text-xl font-medium">Loading...</p>;
+    return (
+      <p className="text-center py-10 text-xl font-medium">
+        Loading...
+      </p>
+    );
   if (error)
     return (
       <p className="text-center py-10 text-red-500 font-medium">
         Error: {error}
       </p>
     );
-  if (!outfits.length)
-    return <p className="text-center py-10 text-xl">No outfits found.</p>;
 
   return (
     <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen">
@@ -44,9 +49,8 @@ function Outfit({ addAuthHeader }) {
           <div
             key={item._id}
             className="bg-white rounded-lg shadow-md p-4 space-y-2 cursor-pointer transition-transform transform hover:scale-105"
-            onClick={() => openView(item)}
-          >
-            <div className="grid grid-cols-2 gap-2">
+            onClick={() => openView(item)}>
+            <div className="grid grid-cols-1 gap-2">
               {item.hat && (
                 <img
                   src={item.hat.image}
@@ -56,14 +60,14 @@ function Outfit({ addAuthHeader }) {
               )}
               {item.top && (
                 <img
-                  src={item.shirt.image}
+                  src={item.top.image}
                   alt="shirt"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
               {item.bottom && (
                 <img
-                  src={item.pants.image}
+                  src={item.bottom.image}
                   alt="pants"
                   className="w-full h-auto object-cover rounded"
                 />
@@ -81,7 +85,11 @@ function Outfit({ addAuthHeader }) {
       </div>
 
       {selectedItem && (
-        <View isOpen={true} onClose={closeView} item={selectedItem} />
+        <View
+          isOpen={true}
+          onClose={closeView}
+          item={selectedItem}
+        />
       )}
     </div>
   );
