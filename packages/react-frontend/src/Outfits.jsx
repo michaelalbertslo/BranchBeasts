@@ -1,44 +1,90 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import View from "./View";
+import { API_BASE_URL } from "./azure";
 
-function Outfits() {
-  const closet = [
-    { box: "1" },
-    { box: "2" },
-    { box: "3" },
-    { box: "4" },
-    { box: "5" },
-    { box: "6" },
-    { box: "7" },
-    { box: "8" },
-    { box: "9" },
-    { box: "10" },
-    { box: "11" },
-    { box: "12" },
-    { box: "13" },
-    { box: "14" },
-    { box: "15" },
-    { box: "16" },
-    { box: "17" },
-    { box: "18" },
-    { box: "19" },
-    { box: "20" }
-  ];
+
+function Outfit({ addAuthHeader }) {
+  const [outfits, setOutfits] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const openView = (item) => setSelectedItem(item);
+  const closeView = () => setSelectedItem(null);
+
+  useEffect(() => {
+    fetch(`${API_BASE_URL}/closet`, {
+      method: "GET",
+      headers: addAuthHeader(),
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Network response was not ok");
+        return res.json();
+      })
+      .then((data) => setOutfits(data.items_list))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  if (loading)
+    return <p className="text-center py-10 text-xl font-medium">Loading...</p>;
+  if (error)
+    return (
+      <p className="text-center py-10 text-red-500 font-medium">
+        Error: {error}
+      </p>
+    );
+  if (!outfits.length)
+    return <p className="text-center py-10 text-xl">No outfits found.</p>;
 
   return (
-    <div className="flex justify-center py-5">
-      <div className="grid lg:grid-cols-12 grid-cols-6 gap-4">
-        {closet.map((clothing, index) => (
-          <Link
-            to="/outfit-gen"
-            className="flex justify-center items-center bg-gray-400 w-20 h-20"
-            key={index}>
-            <strong>{clothing.box}</strong>
-          </Link>
+    <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {outfits.map((item) => (
+          <div
+            key={item._id}
+            className="bg-white rounded-lg shadow-md p-4 space-y-2 cursor-pointer transition-transform transform hover:scale-105"
+            onClick={() => openView(item)}
+          >
+            <div className="grid grid-cols-2 gap-2">
+              {item.hat && (
+                <img
+                  src={item.hat.image}
+                  alt="hat"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.top && (
+                <img
+                  src={item.shirt.image}
+                  alt="shirt"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.bottom && (
+                <img
+                  src={item.pants.image}
+                  alt="pants"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.shoes && (
+                <img
+                  src={item.shoes.image}
+                  alt="shoes"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+            </div>
+          </div>
         ))}
       </div>
+
+      {selectedItem && (
+        <View isOpen={true} onClose={closeView} item={selectedItem} />
+      )}
     </div>
   );
 }
 
-export default Outfits;
+export default Outfit;
