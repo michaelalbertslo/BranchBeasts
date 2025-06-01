@@ -82,9 +82,10 @@ function signupUser(creds) {
 
 
   return (
-  <div>
+  <div class="bg-[url(../public/fa-bg.jpeg)] bg-cover bg-center min-h-screen">
     <NavBar />
-    <Routes>
+    <div class="pt-5">
+      <Routes>
       <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
       <Route path="/outfits" element={<Outfits />} />
       <Route path="/outfit-gen" element={<OutfitGen />} />
@@ -92,7 +93,8 @@ function signupUser(creds) {
       <Route path="/view" element={<View />} />
       <Route path="/login" element={<Login handleSubmit={loginUser} />} />
       <Route path="/signup" element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />} />
-    </Routes>
+      </Routes>
+    </div>
     <p>{message}</p>
   </div>
 );

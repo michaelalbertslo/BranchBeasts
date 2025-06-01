@@ -95,10 +95,10 @@ function Upload() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+    <div className="min-h-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-6 rounded-lg shadow">
+        className="w-full max-w-md rounded-2xl bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 p-3">
         <h2 className="text-2xl font-semibold mb-4 text-center">
           Upload Closet Item
         </h2>
@@ -114,7 +114,7 @@ function Upload() {
             type="text"
             value={itemName}
             onChange={(e) => setItemName(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring"
+            className="w-full bg-gradient-to-br from-[#daffa0] via-transparent to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 rounded px-3 py-2 focus:outline-none focus:ring"
             required
           />
         </div>
@@ -130,7 +130,7 @@ function Upload() {
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring"
+            className="w-full bg-gradient-to-br from-[#daffa0] via-transparent to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 rounded px-3 py-2 focus:outline-none focus:ring"
           />
         </div>
 
@@ -227,7 +227,7 @@ function Upload() {
             type="file"
             accept="image/*"
             onChange={(ev) => uploadImage(ev.target)}
-            className="w-full"
+            className="bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 rounded focus:outline-none focus:ring"
           />
           {photo && (
             <p className="mt-2 text-green-600 text-sm">
@@ -239,7 +239,7 @@ function Upload() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+          className="w-full bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 transition">
           {loading ? "Submitting…" : "Submit"}
         </button>
       </form>

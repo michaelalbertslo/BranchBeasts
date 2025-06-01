@@ -26,8 +26,8 @@ function Outfits() {
   ];
 
   return (
-    <div className="flex justify-center py-5">
-      <div className="grid lg:grid-cols-12 grid-cols-6 gap-4">
+    <div className="justify-center container mx-auto px-32 py-8 rounded-3xl bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 min-h-screen">
+      <div className="grid lg:grid-cols-8 grid-cols-4 gap-4">
         {closet.map((clothing, index) => (
           <Link
             to="/outfit-gen"
