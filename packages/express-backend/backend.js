@@ -245,8 +245,6 @@ app.delete("/outfits/:id", (req, res) => {
 })});
 
 
-app.listen(port, () => {
-  console.log(
-    `REST API Is Listening`
-  );
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
 });
