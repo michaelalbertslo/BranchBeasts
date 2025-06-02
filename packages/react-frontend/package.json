@@ -10,9 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.1.8",
+    "@tailwindcss/cli": "^4.1.6",
     "@tailwindcss/vite": "^4.1.8",
-    "esbuild": "^0.25.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
