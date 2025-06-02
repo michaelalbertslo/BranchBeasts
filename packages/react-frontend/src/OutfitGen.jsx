@@ -271,18 +271,25 @@ function OutfitGen() {
         <button onClick={prevHat} className="flex justify-center py-2">
           <FiArrowLeft className="text-4xl" />
         </button>
-        {/* Image container */}
-        {hats.length > 0 ? (
+        {/*Hat image container*/ }
+        {hatNull ? (
+          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+            <span className="text-xs text-gray-500">No Hat</span>
+          </div>
+        ) : hats.length > 0 ? (
           <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
             <img
               src={hats[hatIndex].image_url}
               alt="Hat"
               className="w-full h-full object-cover"
             />
+            {hatKeep && (
+              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+            )}
           </div>
         ) : (
           <div className="flex justify-center items-center w-50 h-50 bg-white rounded-lg shadow-md">
-            <span className="text-xs text-gray-500">No hats</span>
+            <span className="text-xs text-gray-500">No hats in your closet</span>
           </div>
         )}
         {/* Right arrow */}
@@ -312,17 +319,24 @@ function OutfitGen() {
         <button onClick={prevJacket} className="flex justify-center py-2">
           <FiArrowLeft className="text-4xl" />
         </button>
-        {jackets.length > 0 ? (
+        {jacketNull ? (
+          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+            <span className="text-xs text-gray-500">No Jacket</span>
+          </div>
+        ) : jackets.length > 0 ? (
           <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
             <img
               src={jackets[jacketIndex].image_url}
               alt="Jacket"
               className="w-full h-full object-cover"
             />
+            {jacketKeep && (
+              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+            )}
           </div>
         ) : (
           <div className="flex justify-center items-center w-50 h-50 bg-white rounded-lg shadow-md">
-            <span className="text-xs text-gray-500">No jackets</span>
+            <span className="text-xs text-gray-500">No Jackets in your closet</span>
           </div>
         )}
         <button onClick={nextJacket} className="flex justify-center py-2">
@@ -350,17 +364,25 @@ function OutfitGen() {
         <button onClick={prevShirt} className="flex justify-center py-2">
           <FiArrowLeft className="text-4xl" />
         </button>
-        {shirts.length > 0 ? (
+        {/*Shirt Image Container */}
+        {shirtNull ? (
+          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+            <span className="text-xs text-gray-500">No Shirt</span>
+          </div>
+        ) : shirts.length > 0 ? (
           <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
             <img
               src={shirts[shirtIndex].image_url}
               alt="Shirt"
               className="w-full h-full object-cover"
             />
+            {shirtKeep && (
+              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+            )}
           </div>
         ) : (
           <div className="flex justify-center items-center w-50 h-50 bg-white rounded-lg shadow-md">
-            <span className="text-xs text-gray-500">No shirts</span>
+            <span className="text-xs text-gray-500">No shirts in your closet</span>
           </div>
         )}
         <button onClick={nextShirt} className="flex justify-center py-2">
@@ -388,17 +410,24 @@ function OutfitGen() {
         <button onClick={prevPants} className="flex justify-center py-2">
           <FiArrowLeft className="text-4xl" />
         </button>
-        {pants.length > 0 ? (
+        {pantsNull ? (
+          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+            <span className="text-xs text-gray-500">No Bottoms</span>
+          </div>
+        ) : pants.length > 0 ? (
           <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
             <img
               src={pants[pantsIndex].image_url}
-              alt="Pants"
+              alt="Bottoms"
               className="w-full h-full object-cover"
             />
+            {pantsKeep && (
+              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+            )}
           </div>
         ) : (
           <div className="flex justify-center items-center w-50 h-50 bg-white rounded-lg shadow-md">
-            <span className="text-xs text-gray-500">No pants</span>
+            <span className="text-xs text-gray-500">No Bottoms in your closet</span>
           </div>
         )}
         <button onClick={nextPants} className="flex justify-center py-2">
@@ -426,17 +455,24 @@ function OutfitGen() {
         <button onClick={prevSocks} className="flex justify-center py-2">
           <FiArrowLeft className="text-4xl" />
         </button>
-        {socks.length > 0 ? (
+        {socksNull ? (
+          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+            <span className="text-xs text-gray-500">No Socks</span>
+          </div>
+        ) : socks.length > 0 ? (
           <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
             <img
               src={socks[socksIndex].image_url}
               alt="Socks"
               className="w-full h-full object-cover"
             />
+            {socksKeep && (
+              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+            )}
           </div>
         ) : (
           <div className="flex justify-center items-center w-50 h-50 bg-white rounded-lg shadow-md">
-            <span className="text-xs text-gray-500">No socks</span>
+            <span className="text-xs text-gray-500">No socks in your closet</span>
           </div>
         )}
         <button onClick={nextSocks} className="flex justify-center py-2">
@@ -464,17 +500,24 @@ function OutfitGen() {
         <button onClick={prevShoes} className="flex justify-center py-2">
           <FiArrowLeft className="text-4xl" />
         </button>
-        {shoes.length > 0 ? (
+        {shoesNull ? (
+          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+            <span className="text-xs text-gray-500">No Shoes</span>
+          </div>
+        ) : shoes.length > 0 ? (
           <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
             <img
               src={shoes[shoesIndex].image_url}
               alt="Shoes"
               className="w-full h-full object-cover"
             />
+            {shoesKeep && (
+              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+            )}
           </div>
         ) : (
           <div className="flex justify-center items-center w-50 h-50 bg-white rounded-lg shadow-md">
-            <span className="text-xs text-gray-500">No shoes</span>
+            <span className="text-xs text-gray-500">No shoes in your closet</span>
           </div>
         )}
         <button onClick={nextShoes} className="flex justify-center py-2">

@@ -51,42 +51,40 @@ function Outfit({ addAuthHeader }) {
             className="bg-white rounded-lg shadow-md p-4 space-y-2 cursor-pointer transition-transform transform hover:scale-105"
             onClick={() => openView(item)}>
             <div className="grid grid-cols-1 gap-2">
-              {item.hat && (
+              {item.hat?.image && (
                 <img
                   src={item.hat.image}
-                  alt="hat"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.jacket && (
+              {item.jacket?.image && (
                 <img
                   src={item.jacket.image}
-                  alt="jacket"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.shirt && (
+              {item.shirt?.image && (
                 <img
                   src={item.shirt.image}
-                  alt="jacket"
+                  alt="shirt"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.pants && (
+              {item.pants?.image && (
                 <img
                   src={item.pants.image}
                   alt="pants"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.socks && (
+              {item.socks?.image && (
                 <img
                   src={item.socks.image}
-                  alt="pants"
+                  alt="socks"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.shoes && (
+              {item.shoes?.image && (
                 <img
                   src={item.shoes.image}
                   alt="shoes"
