@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "./azure";
 
-const SERVER_ORIGIN = "http://localhost:8000";
+const SERVER_ORIGIN = `${API_BASE_URL}`;
 
 function Upload() {
   const [itemName, setItemName] = useState("");

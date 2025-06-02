@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FiAlignJustify } from "react-icons/fi";
 
 function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <header class="bg-white shadow-2xl p-3">
       <nav class="flex justify-between items-center w-[92%] mx-auto">
@@ -26,6 +27,11 @@ function NavBar() {
             <li>
               <Link to="/upload" class="text-xl font-bold">
                 Upload Item
+              </Link>
+            </li>
+            <li>
+              <Link to="/outfit-gen" class="text-xl font-bold">
+                Create Outfit
               </Link>
             </li>
           </ul>
