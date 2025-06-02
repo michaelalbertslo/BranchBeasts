@@ -15,3 +15,6 @@ CSC307 Group Project test push - jack
 ### 3. Protected Fetch Flow
 
 ![Protected Fetch](./docs/Protected API Flow.png)
+
+Azure Continuous Deployment Webiste Link!
+https://witty-wave-004c6611e.6.azurestaticapps.net

@@ -13,6 +13,7 @@ import View from "./View";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Login from "./Login";
+import { API_BASE_URL } from "./azure";
 
 
 function MyApp() {
@@ -28,7 +29,7 @@ function MyApp() {
 
 
   function loginUser(creds) {
-    fetch("http://localhost:8000/login", {
+    fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(creds)
@@ -58,7 +59,7 @@ function MyApp() {
 }
 
 function signupUser(creds) {
-  fetch("http://localhost:8000/signup", {
+  fetch(`${API_BASE_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(creds),
@@ -82,35 +83,24 @@ function signupUser(creds) {
 
 
   return (
-  <div>
+  <div class="bg-[url(../public/fa-bg.jpeg)] bg-cover bg-center min-h-screen">
     <NavBar />
-    <Routes>
+    <div class="pt-5">
+      <Routes>
       <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
-      <Route path="/outfits" element={<Outfits />} />
+      <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
       <Route path="/outfit-gen" element={<OutfitGen />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/view" element={<View />} />
-      <Route 
-        path="/login" 
-        element={
-          <Login 
-            handleSubmit={loginUser}
-            buttonLabel="Log In"
-            message={message} 
-          />
-        } 
-      />
-      <Route 
-        path="/signup" 
-        element={
-          <Login 
-            handleSubmit={signupUser} 
-            buttonLabel="Sign Up"
-            message={message} 
-          />
-        } 
-      />
-    </Routes>
+<Route
+  path="/login"
+  element={<Login handleSubmit={loginUser} buttonLabel="Log In" message={message} />}
+/>
+<Route
+  path="/signup"
+  element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" message={message} />}
+/>
+
   </div>
 );
 }

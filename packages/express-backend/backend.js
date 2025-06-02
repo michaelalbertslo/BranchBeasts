@@ -5,6 +5,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
+import { v4 as uuidv4 } from 'uuid';
 import clothingItemService from "./services/clothingItem-service.js";
 import {
   registerUser,
@@ -13,6 +14,7 @@ import {
 } from "./auth.js";
 import UserService from "./services/User-service.js";
 import { uploadImage } from "./services/azure-blob.js";
+import outfitService from "./services/outfits-service.js";
 
 const {
   getClothingItems,
@@ -21,6 +23,24 @@ const {
   deleteClothingItemById,
   toggleFavoriteStatus
 } = clothingItemService;
+
+const {
+  getUsers,
+  getUserById,
+  getUserByName,
+  getUserByUserName,
+  getUserByNameAndUserName,
+  addUser,
+  delUser,
+} = UserService
+
+const {
+  getOutfitItems,
+  getOutfitItemById,
+  addOutfitItem,
+  deleteOutfitItemById,
+  // updateOutfitItem,
+} = outfitService
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "mongo.env") });
@@ -110,7 +130,7 @@ app.post("/items", async (req, res) => {
     const newItem = {
       user_id: "00", //get from user that is currently logged in
       item_name: itemName,
-      item_id: "001112", //randomly generate with some params
+      item_id: uuidv4(), //randomly generate with some params
       color,
       type,
       size,
@@ -145,16 +165,16 @@ app.get("/users", (req, res) => {
   const username = req.query.username;
   let query;
   if (name != undefined && username === undefined) {
-    query = UserService.getUserByName(name);
-  } else if (username != undefined && name === undefined) {
-    query = UserService.getUserByUserName(username);
-  } else if (username != undefined && name != undefined) {
-    query = UserService.getUserByNameAndUserName(
-      name,
-      username
-    );
-  } else {
-    query = UserService.getUsers();
+    query = getUserByName(name);
+  } 
+  else if (username != undefined && name === undefined) {
+    query = getUserByUserName(username);
+  }
+  else if (username != undefined && name != undefined) {
+    query = getUserByNameAndUserName(name, username);
+  }
+  else {
+    query = getUsers();
   }
   query
     .then((users) => res.send({ users_list: users }))
@@ -163,13 +183,68 @@ app.get("/users", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  UserService.addUser(userToAdd)
-    .then((savedUser) => res.status(201).send(savedUser))
-    .catch((err) => res.status(400).send(err.message));
+  addUser(userToAdd)
+  .then(savedUser => res.status(201).send(savedUser))
+  .catch(err => res.status(400).send(err.message))
 });
 
-app.listen(port, () => {
-  console.log(
-    `Clothing API listening at http://localhost:${port}`
-  );
+app.delete("/users/:id", (req, res) => {
+  const id = req.params["id"];
+  delUser(id)
+  .then(deleteUser => {
+    if (deleteUser === undefined) 
+      return res.status(404).send();
+  else
+    return res.status(204).send();
+  })
+  .catch((err) => {
+    console.error(err);
+  res.status(500).send(err.message)
+})});
+
+app.get("/outfits", (req, res) => {
+  getOutfitItems()
+  .then((outfitItems) => res.send({ outfits: outfitItems }))
+  .catch((err) => res.status(500).send(err.message));
+})
+
+app.get("/outfits/:id", (req, res) => {
+  const id = req.params["id"]; 
+  getOutfitItemById(id)
+  .then(result => {
+    if (result === undefined) {
+      res.status(404).send("Resource not found.");
+    } else {
+      res.send(result);
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send(err.message)
+  })});
+
+app.post("/outfits", (req, res) => {
+  const outfitToAdd = req.body;
+  addOutfitItem(outfitToAdd)
+  .then(savedFit => res.status(201).send(savedFit))
+  .catch(err => res.status(400).send(err.message))
+});
+
+app.delete("/outfits/:id", (req, res) => {
+  const id = req.params["id"];
+  deleteOutfitItemById(id)
+  .then(deleteOutfit => {
+    if (deleteOutfit === undefined) 
+      return res.status(404).send();
+  else
+    return res.status(204).send();
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send(err.message)
+})});
+
+
+app.listen(process.env.PORT || port, () => {
+  console.log("REST API is listening.");
 });
