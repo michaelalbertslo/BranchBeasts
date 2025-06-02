@@ -1,4 +1,4 @@
-const isLocal = true;  // flip this once before deploying
+const isLocal = false;  // flip this once before deploying
 
 export const API_BASE_URL = isLocal
   ? 'http://localhost:8000'
