@@ -32,7 +32,10 @@ function NavBar() {
         </div>
         <div class="hidden md:flex items-center gap-8">
           <Link to="/login" class="text-xl font-bold">
-            Log In / Sign Up
+            Log In
+          </Link>
+          <Link to="/signup" className="text-xl font-bold">
+            Sign Up
           </Link>
         </div>
       </nav>

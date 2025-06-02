@@ -38,8 +38,8 @@ function MyApp() {
           res.json().then((data) => {
             setToken(data.token);
             setMessage("Login successful!");
-          });
-        } else {
+        });
+      } else {
           setMessage(`Login failed: ${res.status}`);
         }
       })
@@ -61,7 +61,7 @@ function signupUser(creds) {
   fetch("http://localhost:8000/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(creds)
+    body: JSON.stringify(creds),
   })
     .then((res) => {
       if (res.status === 201) {
@@ -80,6 +80,7 @@ function signupUser(creds) {
 
 
 
+
   return (
   <div>
     <NavBar />
@@ -89,13 +90,29 @@ function signupUser(creds) {
       <Route path="/outfit-gen" element={<OutfitGen />} />
       <Route path="/upload" element={<Upload />} />
       <Route path="/view" element={<View />} />
-      <Route path="/login" element={<Login handleSubmit={loginUser} />} />
-      <Route path="/signup" element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />} />
+      <Route 
+        path="/login" 
+        element={
+          <Login 
+            handleSubmit={loginUser}
+            buttonLabel="Log In"
+            message={message} 
+          />
+        } 
+      />
+      <Route 
+        path="/signup" 
+        element={
+          <Login 
+            handleSubmit={signupUser} 
+            buttonLabel="Sign Up"
+            message={message} 
+          />
+        } 
+      />
     </Routes>
-    <p>{message}</p>
   </div>
 );
-
 }
 
 
