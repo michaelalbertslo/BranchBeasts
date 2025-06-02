@@ -82,28 +82,39 @@ function signupUser(creds) {
 
 
 
-  return (
-  <div class="bg-[url(../public/fa-bg.jpeg)] bg-cover bg-center min-h-screen">
+return (
+  <div>
     <NavBar />
-    <div class="pt-5">
+    <div className="pt-5">
       <Routes>
-      <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
-      <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
-      <Route path="/outfit-gen" element={<OutfitGen />} />
-      <Route path="/upload" element={<Upload />} />
-      <Route path="/view" element={<View />} />
-<Route
-  path="/login"
-  element={<Login handleSubmit={loginUser} buttonLabel="Log In" message={message} />}
-/>
-<Route
-  path="/signup"
-  element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" message={message} />}
-/>
-
+        <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
+        <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
+        <Route path="/outfit-gen" element={<OutfitGen />} />
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/view" element={<View />} />
+        <Route
+          path="/login"
+          element={
+            <Login
+              handleSubmit={loginUser}
+              buttonLabel="Log In"
+              message={message}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Login
+              handleSubmit={signupUser}
+              buttonLabel="Sign Up"
+              message={message}
+            />
+          }
+        />
+      </Routes>
+    </div>
   </div>
 );
 }
-
-
 export default MyApp;
