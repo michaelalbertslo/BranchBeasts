@@ -58,16 +58,30 @@ function Outfit({ addAuthHeader }) {
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.top && (
+              {item.jacket && (
                 <img
-                  src={item.top.image}
-                  alt="shirt"
+                  src={item.jacket.image}
+                  alt="jacket"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.bottom && (
+              {item.shirt && (
                 <img
-                  src={item.bottom.image}
+                  src={item.shirt.image}
+                  alt="jacket"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.pants && (
+                <img
+                  src={item.pants.image}
+                  alt="pants"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.socks && (
+                <img
+                  src={item.socks.image}
                   alt="pants"
                   className="w-full h-auto object-cover rounded"
                 />

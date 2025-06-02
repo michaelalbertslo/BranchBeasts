@@ -17,7 +17,7 @@ const outfitSchema = new mongoose.Schema(
             }
 
         },
-    top: {
+    jacket: {
         id: 
             {
                 type: String,
@@ -32,7 +32,7 @@ const outfitSchema = new mongoose.Schema(
             }
 
     },
-    bottom: {
+    shirt: {
         id: 
             {
                 type: String,
@@ -46,6 +46,35 @@ const outfitSchema = new mongoose.Schema(
                 default: null
             }
 
+        },
+    pants: {
+        id: 
+            {
+                type: String,
+                trim: true,
+                default: null
+            },
+        image:
+            {
+                type: String,
+                trim: true,
+                default: null
+            }
+
+    },
+    socks: {
+        id: 
+            {
+                type: String,
+                trim: true,
+                default: null
+            },
+        image:
+            {
+                type: String,
+                trim: true,
+                default: null
+            }
     },
     shoes: {
         id: 
@@ -60,7 +89,8 @@ const outfitSchema = new mongoose.Schema(
                 trim: true,
                 default: null
             }
-    }
+
+        },
   },
   { collection: "outfits" }
 );

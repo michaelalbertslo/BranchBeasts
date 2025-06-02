@@ -7,6 +7,7 @@ function OutfitGen() {
   const [hatIndex, setHatIndex] = useState(0);
   const [hats, setHats] = useState([]);
   const [hatKeep, setHatKeep] = useState(false);
+  const [hatNull, setHatNull] = useState(false);
   useEffect(() => {
     fetch(`${API_BASE_URL}/items?type=hat`)
       .then((res) => res.json())
@@ -26,11 +27,17 @@ function OutfitGen() {
   const toggleHatKeep = () => {
     setHatKeep((prev) => !prev);
   };
+  const toggleHatNull = () => {
+    setHatNull((prev) => !prev);
+    if (hatKeep) setHatKeep(false);
+  };
 
   //jacket state and fetching
   const [jacketIndex, setJacketIndex] = useState(0);
   const [jackets, setJackets] = useState([]);
   const [jacketKeep, setJacketKeep] = useState(false);
+  const [jacketNull, setJacketNull] = useState(false);
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/items?type=jacket`)
       .then((res) => res.json())
@@ -50,11 +57,16 @@ function OutfitGen() {
   const toggleJacketKeep = () => {
     setJacketKeep((prev) => !prev);
   };
+  const toggleJacketNull = () => {
+    setJacketNull((prev) => !prev);
+    if (jacketKeep) setJacketKeep(false);
+  };
 
   // ── State & fetch for “Shirt” ──
   const [shirtIndex, setShirtIndex] = useState(0);
   const [shirts, setShirts] = useState([]);
   const [shirtKeep, setShirtKeep] = useState(false);
+  const [shirtNull, setShirtNull] = useState(false);
   useEffect(() => {
     fetch(`${API_BASE_URL}/items?type=shirt`)
       .then((res) => res.json())
@@ -72,11 +84,17 @@ function OutfitGen() {
   const toggleShirtKeep = () => {
     setShirtKeep((prev) => !prev);
   };
+  const toggleShirtNull = () => {
+    setShirtNull((prev) => !prev);
+    if (shirtKeep) setShirtKeep(false);
+  };
 
   // ── State & fetch for “Pants” ──
   const [pantsIndex, setPantsIndex] = useState(0);
   const [pants, setPants] = useState([]);
-  const [pantsKeep, setPantsKeep] = useState(0);
+  const [pantsKeep, setPantsKeep] = useState(false);
+  const [pantsNull, setPantsNull] = useState(false)
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/items?type=pants`)
       .then((res) => res.json())
@@ -94,11 +112,17 @@ function OutfitGen() {
   const togglePantsKeep = () => {
     setPantsKeep((prev) => !prev);
   };
+  const togglePantsNull = () => {
+    setPantsNull((prev) => !prev);
+    if (pantsKeep) setPantsKeep(false);
+  };
 
   // ── State & fetch for “Socks” ──
   const [socksIndex, setSocksIndex] = useState(0);
   const [socks, setSocks] = useState([]);
   const [socksKeep, setSocksKeep] = useState(false);
+  const [socksNull, setSocksNull] = useState(false);
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/items?type=socks`)
       .then((res) => res.json())
@@ -116,11 +140,17 @@ function OutfitGen() {
   const toggleSocksKeep = () => {
     setSocksKeep((prev) => !prev);
   };
+  const toggleSocksNull = () => {
+    setSocksNull((prev) => !prev);
+    if (socksKeep) setSocksKeep(false);
+  };
 
   // ── State & fetch for “Shoes” ──
   const [shoesIndex, setShoesIndex] = useState(0);
   const [shoes, setShoes] = useState([]);
   const [shoesKeep, setShoesKeep] = useState(false);
+  const [shoesNull, setShoesNull] = useState(false);
+
   useEffect(() => {
     fetch(`${API_BASE_URL}/items?type=shoes`)
       .then((res) => res.json())
@@ -138,15 +168,87 @@ function OutfitGen() {
   const toggleShoesKeep = () => {
     setShoesKeep((prev) => !prev);
   };
+  const toggleShoesNull = () => {
+    setShoesNull((prev) => !prev);
+    if (shoesKeep) setShoesKeep(false);
+  };
 
   //randomizer
   const randomizeAll = () => {
-    if (!hatKeep && hats.length) setHatIndex(Math.floor(Math.random() * hats.length));
-    if (!jacketKeep && jackets.length) setJacketIndex(Math.floor(Math.random() * jackets.length));
-    if (!shirtKeep && shirts.length) setShirtIndex(Math.floor(Math.random() * shirts.length));
-    if (!pantsKeep && pants.length) setPantsIndex(Math.floor(Math.random() * pants.length));
-    if (!socksKeep && socks.length) setSocksIndex(Math.floor(Math.random() * socks.length));
-    if (!shoesKeep && shoes.length) setShoesIndex(Math.floor(Math.random() * shoes.length));
+    if (!hatKeep && !hatNull &&hats.length) setHatIndex(Math.floor(Math.random() * hats.length));
+    if (!jacketKeep && !jacketNull &&jackets.length) setJacketIndex(Math.floor(Math.random() * jackets.length));
+    if (!shirtKeep && !shirtNull &&shirts.length) setShirtIndex(Math.floor(Math.random() * shirts.length));
+    if (!pantsKeep && !pantsNull & pants.length) setPantsIndex(Math.floor(Math.random() * pants.length));
+    if (!socksKeep && !socksNull &&socks.length) setSocksIndex(Math.floor(Math.random() * socks.length));
+    if (!shoesKeep && !shoesNull && shoes.length) setShoesIndex(Math.floor(Math.random() * shoes.length));
+  };
+
+  //function to save outfits
+  const saveOutfit = async () => {
+    const hatObj = hatNull
+      ? { id: null, image: null }
+      : hats.length > 0
+      ? { id: hats[hatIndex]._id, image: hats[hatIndex].image_url }
+      : { id: null, image: null };
+
+    const jacketObj = jacketNull
+      ? { id: null, image: null }
+      : jackets.length > 0
+      ? { id: jackets[jacketIndex]._id, image: jackets[jacketIndex].image_url }
+      : { id: null, image: null };
+
+    const shirtObj = shirtNull
+      ? { id: null, image: null }
+      : shirts.length > 0
+      ? { id: shirts[shirtIndex]._id, image: shirts[shirtIndex].image_url }
+      : { id: null, image: null };
+
+    const pantsObj = pantsNull
+      ? { id: null, image: null }
+      : pants.length > 0
+      ? { id: pants[pantsIndex]._id, image: pants[pantsIndex].image_url }
+      : { id: null, image: null };
+
+    const socksObj = socksNull
+      ? { id: null, image: null }
+      : socks.length > 0
+      ? { id: socks[socksIndex]._id, image: socks[socksIndex].image_url }
+      : { id: null, image: null };
+
+    const shoesObj = shoesNull
+      ? { id: null, image: null }
+      : shoes.length > 0
+      ? { id: shoes[shoesIndex]._id, image: shoes[shoesIndex].image_url }
+      : { id: null, image: null };
+
+    const payload = {
+      hat: hatObj,
+      jacket: jacketObj,
+      shirt: shirtObj,
+      pants: pantsObj,
+      socks: socksObj,
+      shoes: shoesObj,
+    };
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/outfits`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        console.error("Failed to save outfit:", err);
+        alert("Error saving outfit");
+      } else {
+        const saved = await res.json();
+        console.log("Saved outfit:", saved);
+        alert("Outfit saved!");
+      }
+    } catch (err) {
+      console.error("Network error saving outfit:", err);
+      alert("Network error");
+    }
   };
 
   // const nullifyItem = ( => {
@@ -188,8 +290,13 @@ function OutfitGen() {
           <FiArrowRight className="text-4xl" />
         </button>
         {/* Nullify */}
-        <button className="border rounded text-sm leading-none px-1 py-0.5">
-          Nullify
+        <button
+          onClick={toggleHatNull}
+          className={`text-sm leading-none px-1 py-0.5 rounded border ${
+            hatNull ? "bg-red-200" : ""
+          }`}
+        >
+          {hatNull ? "Restore" : "Nullify"}
         </button>
       </div>
 
@@ -221,8 +328,13 @@ function OutfitGen() {
         <button onClick={nextJacket} className="flex justify-center py-2">
           <FiArrowRight className="text-4xl" />
         </button>
-        <button className="border rounded text-sm leading-none px-1 py-0.5">
-          Nullify
+        <button
+          onClick={toggleJacketNull}
+          className={`text-sm leading-none px-1 py-0.5 rounded border ${
+            jacketNull ? "bg-red-200" : ""
+          }`}
+        >
+          {jacketNull ? "Restore" : "Nullify"}
         </button>
       </div>
 
@@ -254,8 +366,13 @@ function OutfitGen() {
         <button onClick={nextShirt} className="flex justify-center py-2">
           <FiArrowRight className="text-4xl" />
         </button>
-        <button className="border rounded text-sm leading-none px-1 py-0.5">
-          Nullify
+        <button
+          onClick={toggleShirtNull}
+          className={`text-sm leading-none px-1 py-0.5 rounded border ${
+            shirtNull ? "bg-red-200" : ""
+          }`}
+        >
+          {shirtNull ? "Restore" : "Nullify"}
         </button>
       </div>
 
@@ -287,8 +404,13 @@ function OutfitGen() {
         <button onClick={nextPants} className="flex justify-center py-2">
           <FiArrowRight className="text-4xl" />
         </button>
-        <button className="border rounded text-sm leading-none px-1 py-0.5">
-          Nullify
+        <button
+          onClick={togglePantsNull}
+          className={`text-sm leading-none px-1 py-0.5 rounded border ${
+            pantsNull ? "bg-red-200" : ""
+          }`}
+        >
+          {pantsNull ? "Restore" : "Nullify"}
         </button>
       </div>
 
@@ -320,8 +442,13 @@ function OutfitGen() {
         <button onClick={nextSocks} className="flex justify-center py-2">
           <FiArrowRight className="text-4xl" />
         </button>
-        <button className="border rounded text-sm leading-none px-1 py-0.5">
-          Nullify
+        <button
+          onClick={toggleSocksNull}
+          className={`text-sm leading-none px-1 py-0.5 rounded border ${
+            socksNull ? "bg-red-200" : ""
+          }`}
+        >
+          {socksNull ? "Restore" : "Nullify"}
         </button>
       </div>
 
@@ -353,8 +480,13 @@ function OutfitGen() {
         <button onClick={nextShoes} className="flex justify-center py-2">
           <FiArrowRight className="text-4xl" />
         </button>
-        <button className="border rounded text-sm leading-none px-1 py-0.5">
-          Nullify
+        <button
+          onClick={toggleShoesNull}
+          className={`text-sm leading-none px-1 py-0.5 rounded border ${
+            shoesNull ? "bg-red-200" : ""
+          }`}
+        >
+          {shoesNull ? "Restore" : "Nullify"}
         </button>
       </div>
       {/* ── Randomize and Save Outfit Buttons ── */}
@@ -365,7 +497,9 @@ function OutfitGen() {
         >
           Randomize
         </button>
-        <button className="border rounded text-sm leading-none px-2 py-1 bg-green-500 text-white hover:bg-green-600">
+        <button 
+          onClick={saveOutfit}
+          className="border rounded text-sm leading-none px-2 py-1 bg-green-500 text-white hover:bg-green-600">
           Save Outfit
         </button>
       </div>
