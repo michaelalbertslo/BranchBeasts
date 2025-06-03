@@ -34,14 +34,19 @@ function NavBar() {
             </Link>
           </div>
 
-          <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105 flex gap-4">
+          <div className="flex gap-4">
+            <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
             <Link to="/login" className="text-xl font-bold">
               Log In
             </Link>
-            <Link to="/signup" className="text-xl font-bold">
-              Sign Up
-            </Link>
           </div>
+          <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+            <Link to="/signup" className="text-xl font-bold">
+            Sign Up
+            </Link>
+            </div>
+            </div>
+
         </div>
       </nav>
 
