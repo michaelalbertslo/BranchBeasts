@@ -16,6 +16,7 @@ function Login({ handleSubmit, buttonLabel = "Log In", message }) {
     setCreds({ username: "", pwd: "" });
   }
 
+console.log("Login.jsx message:", message);
 return (
   <div className="flex items-center justify-center min-h-screen bg-gray-50">
     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-md">
