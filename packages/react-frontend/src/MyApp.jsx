@@ -29,7 +29,7 @@ function MyApp() {
 
 
   function loginUser(creds) {
-    fetch(`${SERVER_ORIGIN}/login`, {
+    fetch(`${API_BASE_URL}/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(creds)
@@ -59,7 +59,7 @@ function MyApp() {
 }
 
 function signupUser(creds) {
-  fetch(`${SERVER_ORIGIN}/signup`, {
+  fetch(`${API_BASE_URL}/signup`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(creds),

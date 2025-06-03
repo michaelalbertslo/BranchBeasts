@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import { API_BASE_URL } from "./azure";
 
-const SERVER_ORIGIN = "http://localhost:8000";
 
 function Upload() {
   const [itemName, setItemName] = useState("");
@@ -25,7 +25,7 @@ function Upload() {
       photo
     };
     try {
-      const res = await fetch(`${SERVER_ORIGIN}/items`, {
+      const res = await fetch(`${API_BASE_URL}/items`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
