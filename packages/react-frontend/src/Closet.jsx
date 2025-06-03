@@ -38,7 +38,7 @@ function Closet({ addAuthHeader }) {
     return <p className="text-center py-10 text-xl">No items found.</p>;
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen">
+    <div className="container mx-auto px-4 py-8 rounded-3xl bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 min-h-screen">
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
         {closet.map((item) => (
           <div

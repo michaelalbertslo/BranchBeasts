@@ -55,6 +55,8 @@ mongoose
 const app = express();
 const port = 8000;
 app.use(cors());
+
+
 app.use(express.json());
 app.post("/signup", registerUser);
 app.post("/login", loginUser);
