@@ -28,11 +28,6 @@ function getUserById(_id) {
   //I dont know if we will need to use an id finder for users but I have it here just incase
 }
 
-// function getUserByName(firstName, lastName) {
-//     return userModel.find({name : {firstName : firstName}})
-// This is for if/when we want to implement finding a user by a first name and/or last name
-// }
-
 function getUserByName(name) {
   return userModel.find({ name: name });
 }
