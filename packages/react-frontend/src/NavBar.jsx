@@ -13,57 +13,73 @@ function NavBar() {
             MyCloset
           </Link>
         </div>
+
         <div
           className="md:hidden text-2xl p-2 cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <FiAlignJustify />
         </div>
+
         <div className="hidden md:flex items-center gap-8">
-            <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
-              <Link to="/outfits" className="text-xl font-bold">
-                MyOutfits
-              </Link>
-            </div>
-            <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
-              <Link to="/upload" className="text-xl font-bold">
-                Upload Item
-              </Link>
-            </div>
-          <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
-            <Link to="/login" className="text-xl font-bold">
-              Log In / Sign Up
+          <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+            <Link to="/outfits" className="text-xl font-bold">
+              MyOutfits
             </Link>
           </div>
-        </div>
-        {menuOpen && (
-          <div className="absolute top-full left-0 w-full md:hidden z-50">
-            <ul className="flex flex-col items-center gap-4 py-4">
-              <li>
-                <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
-                  <Link to="/outfits" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
-                    MyOutfits
-                  </Link>
-                </div>
-              </li>
-              <li>
-                <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
-                  <Link to="/upload" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
-                    Upload Item
-                  </Link>
-                </div>
-              </li>
-              <li>
-                <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
-                  <Link to="/login" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
-                    Log In / Sign Up
-                  </Link>
-                </div>
-              </li>
-            </ul>
+
+          <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+            <Link to="/upload" className="text-xl font-bold">
+              Upload Item
+            </Link>
           </div>
-        )}
+
+          <div className="flex gap-4">
+            <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+            <Link to="/login" className="text-xl font-bold">
+              Log In
+            </Link>
+          </div>
+          <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+            <Link to="/signup" className="text-xl font-bold">
+            Sign Up
+            </Link>
+            </div>
+            </div>
+
+        </div>
       </nav>
+
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-full md:hidden z-50">
+          <ul className="flex flex-col items-center gap-4 py-4">
+            <li>
+              <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+                <Link to="/outfits" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
+                  MyOutfits
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+                <Link to="/upload" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
+                  Upload Item
+                </Link>
+              </div>
+            </li>
+            <li>
+              <div className="rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+                <Link to="/login" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
+                  Log In
+                </Link>
+                <Link to="/signup" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
+                  Sign Up
+                </Link>
+              </div>
+            </li>
+          </ul>
+        </div>
+      )}
     </header>
   );
 }

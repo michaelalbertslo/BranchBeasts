@@ -29,7 +29,7 @@ function MyApp() {
 
 
   function loginUser(creds) {
-    fetch(`${API_BASE_URL}/login`, {
+    fetch("http://localhost:8000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(creds)
@@ -39,8 +39,8 @@ function MyApp() {
           res.json().then((data) => {
             setToken(data.token);
             setMessage("Login successful!");
-          });
-        } else {
+        });
+      } else {
           setMessage(`Login failed: ${res.status}`);
         }
       })
@@ -59,10 +59,10 @@ function MyApp() {
 }
 
 function signupUser(creds) {
-  fetch(`${API_BASE_URL}/signup`, {
+  fetch("http://localhost:8000/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(creds)
+    body: JSON.stringify(creds),
   })
     .then((res) => {
       if (res.status === 201) {
@@ -81,25 +81,40 @@ function signupUser(creds) {
 
 
 
-  return (
-  <div class="bg-[url(../public/fa-bg.jpeg)] bg-cover bg-center min-h-screen">
+
+return (
+  <div>
     <NavBar />
-    <div class="pt-5">
+    <div className="pt-5">
       <Routes>
-      <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
-      <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
-      <Route path="/outfit-gen" element={<OutfitGen />} />
-      <Route path="/upload" element={<Upload />} />
-      <Route path="/view" element={<View />} />
-      <Route path="/login" element={<Login handleSubmit={loginUser} />} />
-      <Route path="/signup" element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />} />
+        <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
+        <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
+        <Route path="/outfit-gen" element={<OutfitGen />} />
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/view" element={<View />} />
+        <Route
+          path="/login"
+          element={
+            <Login
+              handleSubmit={loginUser}
+              buttonLabel="Log In"
+              message={message}
+            />
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <Login
+              handleSubmit={signupUser}
+              buttonLabel="Sign Up"
+              message={message}
+            />
+          }
+        />
       </Routes>
     </div>
-    <p>{message}</p>
   </div>
 );
-
 }
-
-
 export default MyApp;
