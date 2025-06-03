@@ -29,7 +29,7 @@ function MyApp() {
 
 
   function loginUser(creds) {
-    fetch(`${API_BASE_URL}/login`, {
+    fetch("http://localhost:8000/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(creds)
@@ -59,7 +59,7 @@ function MyApp() {
 }
 
 function signupUser(creds) {
-  fetch(`${API_BASE_URL}/signup`, {
+  fetch("http://localhost:8000/signup", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(creds),
