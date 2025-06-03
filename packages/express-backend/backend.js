@@ -102,9 +102,10 @@ app.get("/items/:id", (req, res) => {
 
 /** List items (optionally filter by user_id) */
 app.get("/items", (req, res) => {
-  // /items shows clothing_items
+  // /items shows clothing_items, and additional endpoint for item type
   const filter = {};
   if (req.query.user_id) filter.user_id = req.query.user_id;
+  if (req.query.type) filter.type = req.query.type;
 
   getClothingItems(filter)
     .then((itemsList) => {

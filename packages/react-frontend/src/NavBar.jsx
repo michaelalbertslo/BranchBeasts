@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { FiAlignJustify } from "react-icons/fi";
 
 function NavBar() {
@@ -22,6 +22,11 @@ function NavBar() {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
+        <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
+            <Link to="/outfit-gen" className="text-xl font-bold">
+              Create Outfit
+            </Link>
+          </div>
           <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
             <Link to="/outfits" className="text-xl font-bold">
               MyOutfits
@@ -53,6 +58,11 @@ function NavBar() {
       {menuOpen && (
         <div className="absolute top-full left-0 w-full md:hidden z-50">
           <ul className="flex flex-col items-center gap-4 py-4">
+          <li>
+              <Link to="/outfit-gen" class="text-xl font-bold">
+                Create Outfit
+              </Link>
+            </li>
             <li>
               <div className="rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-1 px-4 hover:scale-105">
                 <Link to="/outfits" className="text-xl font-bold" onClick={() => setMenuOpen(false)}>
