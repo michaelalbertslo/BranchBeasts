@@ -69,7 +69,7 @@ function Upload() {
     reader
       .then((buffer) => {
         const { name, size, type } = firstFile;
-        const url = new URL("/images", SERVER_ORIGIN);
+        const url = new URL("/images", API_BASE_URL);
         url.searchParams.set("filename", name);
 
         return fetch(url.toString(), {
