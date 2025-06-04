@@ -43,7 +43,7 @@ function Outfit({ addAuthHeader }) {
     );
 
   return (
-    <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-blue-50 via-white to-blue-50 min-h-screen">
+    <div className="justify-center container mx-auto px-32 py-8 rounded-3xl bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 min-h-screen">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {outfits.map((item) => (
           <div
@@ -51,28 +51,40 @@ function Outfit({ addAuthHeader }) {
             className="bg-white rounded-lg shadow-md p-4 space-y-2 cursor-pointer transition-transform transform hover:scale-105"
             onClick={() => openView(item)}>
             <div className="grid grid-cols-1 gap-2">
-              {item.hat && (
+              {item.hat?.image && (
                 <img
                   src={item.hat.image}
-                  alt="hat"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.top && (
+              {item.jacket?.image && (
                 <img
-                  src={item.top.image}
+                  src={item.jacket.image}
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.shirt?.image && (
+                <img
+                  src={item.shirt.image}
                   alt="shirt"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.bottom && (
+              {item.pants?.image && (
                 <img
-                  src={item.bottom.image}
+                  src={item.pants.image}
                   alt="pants"
                   className="w-full h-auto object-cover rounded"
                 />
               )}
-              {item.shoes && (
+              {item.socks?.image && (
+                <img
+                  src={item.socks.image}
+                  alt="socks"
+                  className="w-full h-auto object-cover rounded"
+                />
+              )}
+              {item.shoes?.image && (
                 <img
                   src={item.shoes.image}
                   alt="shoes"

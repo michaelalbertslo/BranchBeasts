@@ -29,21 +29,25 @@ function View({ isOpen, onClose, item, onDeleted, addAuthHeader }) {
 
   return (
     <div
-      class={`w-full h-full absolute top-0 px-25 py-50 backdrop-filter backdrop-brightness-75 backdrop-blur-md ${isOpen ? "" : "hidden"}`}>
-      <div class="flex box-border w-full h-full border-4 p-4 bg-gray-500">
-        <strong>Item</strong>
+      class={`absolute top-0 left-0 container rounded-3xl bg-gradient-to-b from-transparent via-[#daffa0] to-transparent shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 min-h-screen flex flex-col justify-center items-center ${isOpen ? "" : "hidden"}`}>
+      <div className="w-full max-w-md aspect-square mb-6">
+        <img
+          src={item.image_url}
+          alt={item.type || "clothing item"}
+          className="w-full h-full object-cover rounded-2xl"
+        />
       </div>
-      <div class="flex justify-center gap-3 py-5">
-        <button class="rounded-full py-2 px-10 bg-gray-400 hover:bg-gray-600">
+      <div className="flex justify-center gap-3">
+        <button className="rounded-xl py-2 px-10 bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105">
           Edit
         </button>
         <button
-          class="rounded-full py-2 px-10 bg-gray-400 hover:bg-gray-600"
+          className="rounded-xl py-2 px-10 bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105"
           onClick={handleDelete}>
           Delete
         </button>
         <button
-          class="rounded-full py-2 px-10 bg-gray-400 hover:bg-gray-600"
+          className="rounded-xl py-2 px-10 bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105"
           onClick={onClose}>
           Save
         </button>

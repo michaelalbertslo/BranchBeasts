@@ -18,9 +18,8 @@ function getOutfitItemById(_id) {
   return outfitModel.findById(_id);
 }
 
-function addOutfitItem(item) {
-  const newItem = new outfitModel(item);
-  return newItem.save();
+function addOutfitItem(outfitObj) {
+  return outfitModel.create(outfitObj);
 }
 
 function deleteOutfitItemById(_id) {
