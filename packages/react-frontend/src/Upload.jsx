@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { API_BASE_URL } from "./azure";
 
 
-function Upload() {
+function Upload({addAuthHeader}) {
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("black");
@@ -27,7 +27,9 @@ function Upload() {
     try {
       const res = await fetch(`${API_BASE_URL}/items`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json",
+          ...addAuthHeader()
+         },
         body: JSON.stringify(payload)
       });
       if (!res.ok) {

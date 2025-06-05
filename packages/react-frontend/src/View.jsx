@@ -9,21 +9,34 @@ function View({ isOpen, onClose, item, onDeleted, addAuthHeader }) {
     try {
       const res = await fetch(`${API_BASE_URL}/items/${item._id}`, {
         method: "DELETE",
-        header: addAuthHeader(),
+        headers: {
+          "Content-Type": "application/json",
+          ...addAuthHeader(), 
+        },
       });
 
-      if (res.status === 204) {
-        // tell parent that deletion succeeded
-        onDeleted(item._id);
-        onClose();
-      } else if (res.status === 404) {
-        console.warn("Item not found");
-      } else {
-        const text = await res.text();
-        console.error("Delete failed:", text);
+      if (res.status === 401) {
+        alert("You must be logged in to delete items.");
+        return;
       }
+      if (res.status === 403) {
+        alert("You can only delete your own items.");
+        return;
+      }
+      if (res.status === 404) {
+        alert("Item not found (maybe it was already deleted).");
+        return;
+      }
+      if (!res.ok) {
+        const text = await res.text();
+        alert(`Delete failed: ${res.status} ${text}`);
+        return;
+      }
+      onDeleted(item._id);
+      onClose();
     } catch (err) {
       console.error("Server error on delete:", err);
+      alert("Network error — please try again.");
     }
   };
 

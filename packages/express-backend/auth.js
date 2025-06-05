@@ -1,5 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { mongo } from "mongoose";
+import User from "./models/UserInfo.js";
 
 const creds = []; // Replace with DB later
 
@@ -14,45 +16,48 @@ function generateAccessToken(username) {
   });
 }
 
-export function registerUser(req, res) {
-  const { username, pwd } = req.body;
+export async function registerUser(req, res) {
+  const { username, pwd, email, name } = req.body; 
   if (!username || !pwd) {
     return res
       .status(400)
       .send("Bad request: Invalid input data.");
   }
-  if (creds.find((c) => c.username === username)) {
+  const existing = await User.findOne({ username });
+  if (existing) {
     return res.status(409).send("Username already taken");
   }
 
-  bcrypt
-    .genSalt(10)
-    .then((salt) => bcrypt.hash(pwd, salt))
-    .then((hashedPassword) => {
-      generateAccessToken(username).then((token) => {
-        creds.push({ username, hashedPassword });
-        res.status(201).send({ token });
-      });
-    });
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(pwd, salt);
+  const newUser = new User({
+    username,
+    name: name || "",
+    email: email || "",
+    passwordToken: hashedPassword
+  });
+
+  await newUser.save();
+  const token = await generateAccessToken(username);
+  return res.status(201).json({ token });
 }
 
-export function loginUser(req, res) {
+export async function loginUser(req, res) {
   const { username, pwd } = req.body;
-  const user = creds.find((c) => c.username === username);
-  if (!user) return res.status(401).send("Unauthorized");
+  if (!username || !pwd) {
+    return res.status(400).send("Bad request");
+  }
+  const userDoc = await User.findOne({username})
+  if (!userDoc) {
+    return res.status(401).send("Unauthorized");
+  }
 
-  bcrypt
-    .compare(pwd, user.hashedPassword)
-    .then((matched) => {
-      if (matched) {
-        generateAccessToken(username).then((token) =>
-          res.status(200).send({ token })
-        );
-      } else {
-        res.status(401).send("Unauthorized");
-      }
-    })
-    .catch(() => res.status(401).send("Unauthorized"));
+  const matched = await bcrypt.compare(pwd, userDoc.passwordToken);
+  if (!matched) {
+    return res.status(401).send("Unauthorized");
+  }
+  const token = await generateAccessToken(username);
+  return res.status(200).json({ token });
 }
 
 export function authenticateUser(req, res, next) {
@@ -64,8 +69,11 @@ export function authenticateUser(req, res, next) {
     token,
     process.env.TOKEN_SECRET,
     (err, decoded) => {
-      if (decoded) next();
-      else res.status(401).end();
+      if (err){ 
+        return res.status(401).end();
+      }
+      req.user = decoded;
+      next();
     }
   );
 }
