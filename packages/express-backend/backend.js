@@ -15,6 +15,7 @@ import {
 import UserService from "./services/User-service.js";
 import { uploadImage } from "./services/azure-blob.js";
 import outfitService from "./services/outfits-service.js";
+import User from "./models/UserInfo.js";   
 
 const {
   getClothingItems,
@@ -118,8 +119,17 @@ app.get("/items", (req, res) => {
 });
 
 /** Create a new clothing item */
-app.post("/items", async (req, res) => {
+app.post("/items", authenticateUser, async (req, res) => {
   try {
+    //new user tracking part
+    const username = req.user.username
+    const users = await getUserByUserName(username);
+    if (!Array.isArray(users) || users.length === 0) {
+      return res.status(401).send("User not found");
+    }
+    const user = users[0];         
+    const userId = user._id.toString(); 
+
     const {
       itemName,
       description,
@@ -131,7 +141,7 @@ app.post("/items", async (req, res) => {
     } = req.body;
 
     const newItem = {
-      user_id: "00", //get from user that is currently logged in
+      user_id: userId, 
       item_name: itemName,
       item_id: uuidv4(), //randomly generate with some params
       color,
@@ -150,17 +160,31 @@ app.post("/items", async (req, res) => {
 });
 
 /** Delete an item by its Mongo _id */
-app.delete("/items/:id", (req, res) => {
-  deleteClothingItemById(req.params.id)
-    .then((deleted) => {
-      if (!deleted)
-        return res.status(404).send("Item not found");
-      res.status(204).end();
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).json({ error: "Server error" });
-    });
+app.delete("/items/:id", authenticateUser, async (req, res) => {
+  try {
+    const itemId = req.params.id;
+    const item = await getClothingItemById(itemId);
+    if (!item) {
+      // No item with that _id
+      return res.status(404).send("Item not found");
+    }
+    const username = req.user.username;
+    const userDoc = await User.findOne({ username });
+    if (!userDoc) {
+      return res.status(401).send("Unauthorized: user not found");
+    }
+    if (item.user_id.toString() !== userDoc._id.toString()) {
+      return res.status(403).send("Forbidden: you do not own this item");
+    }
+    const deleted = await deleteClothingItemById(itemId);
+    if (!deleted) {
+      return res.status(404).send("Item not found");
+    }
+    return res.status(204).end();
+  } catch {
+    console.error("Error deleting item:", err);
+    return res.status(500).json({ error: "Server error" });
+  }
 });
 
 app.get("/users", (req, res) => {

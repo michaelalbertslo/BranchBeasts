@@ -4,7 +4,7 @@ const ClosetUserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true,
+      required: false,
       trim: true
     },
     username: {
@@ -15,7 +15,7 @@ const ClosetUserSchema = new mongoose.Schema(
     },
     email: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
       unique: true
     },
