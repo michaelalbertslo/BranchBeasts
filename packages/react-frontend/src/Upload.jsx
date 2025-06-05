@@ -138,10 +138,13 @@ function Upload({addAuthHeader}) {
 
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label 
+              htmlFor="color"
+              className="block text-gray-700 font-medium mb-1">
               Color
             </label>
             <select
+              id="color"
               value={color}
               onChange={(e) => setColor(e.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring">
@@ -165,10 +168,13 @@ function Upload({addAuthHeader}) {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label 
+              htmlFor="type"
+              className="block text-gray-700 font-medium mb-1">
               Type
             </label>
             <select
+              id="type"
               value={type}
               onChange={(e) => setType(e.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring">
@@ -190,10 +196,13 @@ function Upload({addAuthHeader}) {
 
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-gray-700 font-medium mb-1">
+            <label 
+              htmlFor="size"
+              className="block text-gray-700 font-medium mb-1">
               Size
             </label>
             <select
+              id="size"
               value={size}
               onChange={(e) => setSize(e.target.value)}
               className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring">
@@ -222,10 +231,13 @@ function Upload({addAuthHeader}) {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-medium mb-1">
+          <label 
+            htmlFor="upload"
+            className="block text-gray-700 font-medium mb-1">
             Upload Photo
           </label>
           <input
+            id="upload"
             type="file"
             accept="image/*"
             onChange={(ev) => uploadImage(ev.target)}
