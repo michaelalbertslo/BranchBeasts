@@ -239,7 +239,7 @@ function Upload() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 transition">
+          className="text-black font-bold w-full bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 transition hover:scale-105">
           {loading ? "Submitting…" : "Submit"}
         </button>
       </form>
