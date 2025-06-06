@@ -1,19 +1,27 @@
 import React from "react";
 import { API_BASE_URL } from "./azure";
 
-function View({ isOpen, onClose, item, onDeleted, addAuthHeader }) {
+function View({
+  isOpen,
+  onClose,
+  item,
+  onDeleted,
+  addAuthHeader
+}) {
   if (!item) return null;
-
 
   const handleDelete = async () => {
     try {
-      const res = await fetch(`${API_BASE_URL}/items/${item._id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          ...addAuthHeader(), 
-        },
-      });
+      const res = await fetch(
+        `${API_BASE_URL}/items/${item._id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            ...addAuthHeader()
+          }
+        }
+      );
 
       if (res.status === 401) {
         alert("You must be logged in to delete items.");

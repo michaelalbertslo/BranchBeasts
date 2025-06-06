@@ -16,13 +16,13 @@ export default [
       parserOptions: {
         ecmaVersion: "latest",
         ecmaFeatures: { jsx: true },
-        sourceType: "module",
-      },
+        sourceType: "module"
+      }
     },
 
     plugins: {
       "react-hooks": reactHooks,
-      "react-refresh": reactRefresh,
+      "react-refresh": reactRefresh
     },
 
     rules: {
@@ -31,13 +31,13 @@ export default [
       ...reactHooks.configs.recommended.rules,
       "no-unused-vars": [
         "error",
-        { varsIgnorePattern: "^[A-Z_]" },
+        { varsIgnorePattern: "^[A-Z_]" }
       ],
       "react-refresh/only-export-components": [
         "warn",
-        { allowConstantExport: true },
-      ],
-    },
+        { allowConstantExport: true }
+      ]
+    }
   },
   {
     files: ["**/*.{js,jsx}"],

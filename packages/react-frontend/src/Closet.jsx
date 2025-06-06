@@ -17,7 +17,8 @@ function Closet({ addAuthHeader }) {
       headers: addAuthHeader()
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Network response was not ok");
+        if (!res.ok)
+          throw new Error("Network response was not ok");
         return res.json();
       })
       .then((data) => setCloset(data.items_list))
@@ -27,15 +28,29 @@ function Closet({ addAuthHeader }) {
 
   // called by View when DELETE succeeds
   const handleDeleted = (deletedId) => {
-    setCloset((prev) => prev.filter((it) => it._id !== deletedId));
+    setCloset((prev) =>
+      prev.filter((it) => it._id !== deletedId)
+    );
   };
 
   if (loading)
-    return <p className="text-center py-10 text-xl font-medium">Loading...</p>;
+    return (
+      <p className="text-center py-10 text-xl font-medium">
+        Loading...
+      </p>
+    );
   if (error)
-    return <p className="text-center py-10 text-red-500 font-medium">Error: {error}</p>;
+    return (
+      <p className="text-center py-10 text-red-500 font-medium">
+        Error: {error}
+      </p>
+    );
   if (!closet.length)
-    return <p className="text-center py-10 text-xl">No items found.</p>;
+    return (
+      <p className="text-center py-10 text-xl">
+        No items found.
+      </p>
+    );
 
   return (
     <div className="container mx-auto px-4 py-8 rounded-3xl bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 min-h-screen">
@@ -44,8 +59,7 @@ function Closet({ addAuthHeader }) {
           <div
             key={item._id}
             className="group relative bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-transform duration-300 hover:scale-105 aspect-square"
-            onClick={() => openView(item)}
-          >
+            onClick={() => openView(item)}>
             <img
               src={item.image_url}
               alt={item.type || "clothing item"}
@@ -60,7 +74,7 @@ function Closet({ addAuthHeader }) {
           isOpen={true}
           onClose={closeView}
           item={selectedItem}
-          onDeleted={handleDeleted}    // ← pass the delete‐callback here
+          onDeleted={handleDeleted} // ← pass the delete‐callback here
           addAuthHeader={addAuthHeader}
         />
       )}

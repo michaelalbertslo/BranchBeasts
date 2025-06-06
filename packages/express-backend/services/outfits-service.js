@@ -27,7 +27,9 @@ function deleteOutfitItemById(_id) {
 }
 
 function updateOutfitItem(_id, updatedOutfit) {
-    return outfitModel.findByIdAndUpdate(_id, updatedOutfit, { new : true })
+  return outfitModel.findByIdAndUpdate(_id, updatedOutfit, {
+    new: true
+  });
 }
 
 // function toggleFavoriteStatus(_id, favorited) {
@@ -38,12 +40,10 @@ function updateOutfitItem(_id, updatedOutfit) {
 //   );
 // }
 
-
-
 export default {
   getOutfitItems,
   getOutfitItemById,
   addOutfitItem,
   deleteOutfitItemById,
-  updateOutfitItem,
+  updateOutfitItem
 };

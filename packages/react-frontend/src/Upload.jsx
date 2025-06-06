@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { API_BASE_URL } from "./azure";
 
-
-function Upload({addAuthHeader}) {
+function Upload({ addAuthHeader }) {
   const [itemName, setItemName] = useState("");
   const [description, setDescription] = useState("");
   const [color, setColor] = useState("black");
@@ -27,9 +26,10 @@ function Upload({addAuthHeader}) {
     try {
       const res = await fetch(`${API_BASE_URL}/items`, {
         method: "POST",
-        headers: { "Content-Type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
           ...addAuthHeader()
-         },
+        },
         body: JSON.stringify(payload)
       });
       if (!res.ok) {
@@ -138,7 +138,7 @@ function Upload({addAuthHeader}) {
 
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label 
+            <label
               htmlFor="color"
               className="block text-gray-700 font-medium mb-1">
               Color
@@ -168,7 +168,7 @@ function Upload({addAuthHeader}) {
           </div>
 
           <div>
-            <label 
+            <label
               htmlFor="type"
               className="block text-gray-700 font-medium mb-1">
               Type
@@ -196,7 +196,7 @@ function Upload({addAuthHeader}) {
 
         <div className="mb-4 grid grid-cols-2 gap-4">
           <div>
-            <label 
+            <label
               htmlFor="size"
               className="block text-gray-700 font-medium mb-1">
               Size
@@ -231,7 +231,7 @@ function Upload({addAuthHeader}) {
         </div>
 
         <div className="mb-4">
-          <label 
+          <label
             htmlFor="upload"
             className="block text-gray-700 font-medium mb-1">
             Upload Photo

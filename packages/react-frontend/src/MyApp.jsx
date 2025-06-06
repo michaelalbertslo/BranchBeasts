@@ -15,18 +15,16 @@ import { useLocation } from "react-router-dom";
 import Login from "./Login";
 import { API_BASE_URL } from "./azure";
 
-
 function MyApp() {
   const INVALID_TOKEN = "INVALID_TOKEN";
   const [token, setToken] = useState(INVALID_TOKEN);
   const [message, setMessage] = useState("");
 
   const location = useLocation();
-  
+
   useEffect(() => {
     setMessage(""); // clear the message when the path changes
   }, [location.pathname]);
-
 
   function loginUser(creds) {
     fetch(`${API_BASE_URL}/login`, {
@@ -39,8 +37,8 @@ function MyApp() {
           res.json().then((data) => {
             setToken(data.token);
             setMessage("Login successful!");
-        });
-      } else {
+          });
+        } else {
           setMessage(`Login failed: ${res.status}`);
         }
       })
@@ -50,71 +48,79 @@ function MyApp() {
   }
 
   function addAuthHeader(headers = {}) {
-  if (token === INVALID_TOKEN) return headers;
+    if (token === INVALID_TOKEN) return headers;
 
-  return {
-    ...headers,
-    Authorization: `Bearer ${token}`
-  };
-}
+    return {
+      ...headers,
+      Authorization: `Bearer ${token}`
+    };
+  }
 
-function signupUser(creds) {
-  fetch(`${API_BASE_URL}/signup`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(creds),
-  })
-    .then((res) => {
-      if (res.status === 201) {
-        res.json().then((data) => {
-          setToken(data.token);
-          setMessage(`Signup successful for ${creds.username}`);
-        });
-      } else {
-        setMessage(`Signup failed: ${res.status}`);
-      }
+  function signupUser(creds) {
+    fetch(`${API_BASE_URL}/signup`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(creds)
     })
-    .catch((err) => {
-      setMessage(`Signup error: ${err.message}`);
-    });
-}
+      .then((res) => {
+        if (res.status === 201) {
+          res.json().then((data) => {
+            setToken(data.token);
+            setMessage(
+              `Signup successful for ${creds.username}`
+            );
+          });
+        } else {
+          setMessage(`Signup failed: ${res.status}`);
+        }
+      })
+      .catch((err) => {
+        setMessage(`Signup error: ${err.message}`);
+      });
+  }
 
-
-
-
-return (
-  <div className="bg-[url('../public/fa-bg.jpeg')] bg-cover">
-    <NavBar />
-    <div className="pt-5">
-      <Routes>
-        <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
-        <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
-        <Route path="/outfit-gen" element={<OutfitGen />} />
-        <Route path="/upload" element={<Upload addAuthHeader={addAuthHeader}/>} />
-        <Route path="/view" element={<View />} />
-        <Route
-          path="/login"
-          element={
-            <Login
-              handleSubmit={loginUser}
-              buttonLabel="Log In"
-              message={message}
-            />
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <Login
-              handleSubmit={signupUser}
-              buttonLabel="Sign Up"
-              message={message}
-            />
-          }
-        />
-      </Routes>
+  return (
+    <div className="bg-[url('../public/fa-bg.jpeg')] bg-cover">
+      <NavBar />
+      <div className="pt-5">
+        <Routes>
+          <Route
+            path="/"
+            element={<Closet addAuthHeader={addAuthHeader} />}
+          />
+          <Route
+            path="/outfits"
+            element={<Outfits addAuthHeader={addAuthHeader} />}
+          />
+          <Route path="/outfit-gen" element={<OutfitGen />} />
+          <Route
+            path="/upload"
+            element={<Upload addAuthHeader={addAuthHeader} />}
+          />
+          <Route path="/view" element={<View />} />
+          <Route
+            path="/login"
+            element={
+              <Login
+                handleSubmit={loginUser}
+                buttonLabel="Log In"
+                message={message}
+              />
+            }
+          />
+          <Route
+            path="/signup"
+            element={
+              <Login
+                handleSubmit={signupUser}
+                buttonLabel="Sign Up"
+                message={message}
+              />
+            }
+          />
+        </Routes>
+      </div>
     </div>
-  </div>
-);
+  );
 }
 export default MyApp;

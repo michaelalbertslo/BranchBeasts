@@ -17,7 +17,7 @@ function generateAccessToken(username) {
 }
 
 export async function registerUser(req, res) {
-  const { username, pwd, email, name } = req.body; 
+  const { username, pwd, email, name } = req.body;
   if (!username || !pwd) {
     return res
       .status(400)
@@ -47,12 +47,15 @@ export async function loginUser(req, res) {
   if (!username || !pwd) {
     return res.status(400).send("Bad request");
   }
-  const userDoc = await User.findOne({username})
+  const userDoc = await User.findOne({ username });
   if (!userDoc) {
     return res.status(401).send("Unauthorized");
   }
 
-  const matched = await bcrypt.compare(pwd, userDoc.passwordToken);
+  const matched = await bcrypt.compare(
+    pwd,
+    userDoc.passwordToken
+  );
   if (!matched) {
     return res.status(401).send("Unauthorized");
   }
@@ -69,7 +72,7 @@ export function authenticateUser(req, res, next) {
     token,
     process.env.TOKEN_SECRET,
     (err, decoded) => {
-      if (err){ 
+      if (err) {
         return res.status(401).end();
       }
       req.user = decoded;

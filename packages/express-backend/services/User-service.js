@@ -41,13 +41,13 @@ function getUserByNameAndUserName(name, username) {
 }
 
 function addUser(user) {
-    const userToAdd = new userModel(user);
-    const promise = userToAdd.save();
-    return promise;
-  }
+  const userToAdd = new userModel(user);
+  const promise = userToAdd.save();
+  return promise;
+}
 
-  function delUser(id) {
-    return userModel.findByIdAndDelete(id);
+function delUser(id) {
+  return userModel.findByIdAndDelete(id);
 }
 
 export default {
@@ -57,5 +57,5 @@ export default {
   getUserByUserName,
   getUserByNameAndUserName,
   addUser,
-  delUser,
+  delUser
 };

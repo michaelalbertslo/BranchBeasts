@@ -31,23 +31,37 @@ describe("Upload Component", () => {
 
   test("renders the upload form correctly with default values", () => {
     render(<Upload />);
-    
-    expect(screen.getByText("Upload Closet Item")).toBeInTheDocument();
-    expect(screen.getByLabelText("Item Name")).toBeInTheDocument();
-    expect(screen.getByLabelText("Description")).toBeInTheDocument();
+
+    expect(
+      screen.getByText("Upload Closet Item")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Item Name")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Description")
+    ).toBeInTheDocument();
     expect(screen.getByLabelText("Color")).toBeInTheDocument();
     expect(screen.getByLabelText("Type")).toBeInTheDocument();
     expect(screen.getByLabelText("Size")).toBeInTheDocument();
-    expect(screen.getByLabelText("Favorite")).toBeInTheDocument();
-    expect(screen.getByText("Upload Photo")).toBeInTheDocument();
+    expect(
+      screen.getByLabelText("Favorite")
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("Upload Photo")
+    ).toBeInTheDocument();
     expect(screen.getByText("Submit")).toBeInTheDocument();
   });
 
   test("renders form fields with correct default values", () => {
     render(<Upload />);
-    
-    expect(screen.getByDisplayValue("black")).toBeInTheDocument(); // color
-    expect(screen.getByDisplayValue("shirt")).toBeInTheDocument(); // type
+
+    expect(
+      screen.getByDisplayValue("black")
+    ).toBeInTheDocument(); // color
+    expect(
+      screen.getByDisplayValue("shirt")
+    ).toBeInTheDocument(); // type
     expect(screen.getByDisplayValue("M")).toBeInTheDocument(); // size
     expect(screen.getByLabelText("Favorite")).not.toBeChecked();
   });
@@ -55,39 +69,50 @@ describe("Upload Component", () => {
   test("updates item name when user types", () => {
     render(<Upload />);
     const itemNameInput = screen.getByLabelText("Item Name");
-    
-    fireEvent.change(itemNameInput, { target: { value: "Blue Jeans" } });
+
+    fireEvent.change(itemNameInput, {
+      target: { value: "Blue Jeans" }
+    });
     expect(itemNameInput).toHaveValue("Blue Jeans");
   });
 
   test("updates description when user types", () => {
     render(<Upload />);
-    const descriptionInput = screen.getByLabelText("Description");
-    
-    fireEvent.change(descriptionInput, { target: { value: "Comfortable denim jeans" } });
-    expect(descriptionInput).toHaveValue("Comfortable denim jeans");
+    const descriptionInput =
+      screen.getByLabelText("Description");
+
+    fireEvent.change(descriptionInput, {
+      target: { value: "Comfortable denim jeans" }
+    });
+    expect(descriptionInput).toHaveValue(
+      "Comfortable denim jeans"
+    );
   });
 
   test("updates color when user selects different option", () => {
     render(<Upload />);
     const colorSelect = screen.getByLabelText("Color");
-    
-    fireEvent.change(colorSelect, { target: { value: "blue" } });
+
+    fireEvent.change(colorSelect, {
+      target: { value: "blue" }
+    });
     expect(colorSelect).toHaveValue("blue");
   });
 
   test("updates type when user selects different option", () => {
     render(<Upload />);
     const typeSelect = screen.getByLabelText("Type");
-    
-    fireEvent.change(typeSelect, { target: { value: "pants" } });
+
+    fireEvent.change(typeSelect, {
+      target: { value: "pants" }
+    });
     expect(typeSelect).toHaveValue("pants");
   });
 
   test("updates size when user selects different option", () => {
     render(<Upload />);
     const sizeSelect = screen.getByLabelText("Size");
-    
+
     fireEvent.change(sizeSelect, { target: { value: "L" } });
     expect(sizeSelect).toHaveValue("L");
   });
@@ -95,7 +120,7 @@ describe("Upload Component", () => {
   test("toggles favorite checkbox", () => {
     render(<Upload />);
     const favoriteCheckbox = screen.getByLabelText("Favorite");
-    
+
     expect(favoriteCheckbox).not.toBeChecked();
     fireEvent.click(favoriteCheckbox);
     expect(favoriteCheckbox).toBeChecked();
@@ -106,20 +131,42 @@ describe("Upload Component", () => {
   test("renders all color options", () => {
     render(<Upload />);
     const colorSelect = screen.getByLabelText("Color");
-    const colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet", "black", "white", "grey"];
-    
-    colors.forEach(color => {
-      expect(colorSelect).toContainHTML(`<option value="${color}">${color}</option>`);
+    const colors = [
+      "red",
+      "orange",
+      "yellow",
+      "green",
+      "blue",
+      "indigo",
+      "violet",
+      "black",
+      "white",
+      "grey"
+    ];
+
+    colors.forEach((color) => {
+      expect(colorSelect).toContainHTML(
+        `<option value="${color}">${color}</option>`
+      );
     });
   });
 
   test("renders all type options", () => {
     render(<Upload />);
     const typeSelect = screen.getByLabelText("Type");
-    const types = ["hat", "jacket", "shirt", "pants", "socks", "shoes"];
-    
-    types.forEach(type => {
-      expect(typeSelect).toContainHTML(`<option value="${type}">${type}</option>`);
+    const types = [
+      "hat",
+      "jacket",
+      "shirt",
+      "pants",
+      "socks",
+      "shoes"
+    ];
+
+    types.forEach((type) => {
+      expect(typeSelect).toContainHTML(
+        `<option value="${type}">${type}</option>`
+      );
     });
   });
 
@@ -127,9 +174,11 @@ describe("Upload Component", () => {
     render(<Upload />);
     const sizeSelect = screen.getByLabelText("Size");
     const sizes = ["XS", "S", "M", "L", "XL"];
-    
-    sizes.forEach(size => {
-      expect(sizeSelect).toContainHTML(`<option value="${size}">${size}</option>`);
+
+    sizes.forEach((size) => {
+      expect(sizeSelect).toContainHTML(
+        `<option value="${size}">${size}</option>`
+      );
     });
   });
 
@@ -141,35 +190,50 @@ describe("Upload Component", () => {
     });
 
     render(<Upload />);
-    
+
     // Fill form
-    fireEvent.change(screen.getByLabelText("Item Name"), { target: { value: "Test Item" } });
-    fireEvent.change(screen.getByLabelText("Description"), { target: { value: "Test Description" } });
-    fireEvent.change(screen.getByLabelText("Color"), { target: { value: "red" } });
-    fireEvent.change(screen.getByLabelText("Type"), { target: { value: "jacket" } });
-    fireEvent.change(screen.getByLabelText("Size"), { target: { value: "L" } });
+    fireEvent.change(screen.getByLabelText("Item Name"), {
+      target: { value: "Test Item" }
+    });
+    fireEvent.change(screen.getByLabelText("Description"), {
+      target: { value: "Test Description" }
+    });
+    fireEvent.change(screen.getByLabelText("Color"), {
+      target: { value: "red" }
+    });
+    fireEvent.change(screen.getByLabelText("Type"), {
+      target: { value: "jacket" }
+    });
+    fireEvent.change(screen.getByLabelText("Size"), {
+      target: { value: "L" }
+    });
     fireEvent.click(screen.getByLabelText("Favorite"));
 
     // Submit form
     fireEvent.click(screen.getByText("Submit"));
 
     await waitFor(() => {
-      expect(fetch).toHaveBeenCalledWith("http://localhost:8000/items", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          itemName: "Test Item",
-          description: "Test Description",
-          color: "red",
-          type: "jacket",
-          size: "L",
-          isFavorite: true,
-          photo: ""
-        })
-      });
+      expect(fetch).toHaveBeenCalledWith(
+        "http://localhost:8000/items",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            itemName: "Test Item",
+            description: "Test Description",
+            color: "red",
+            type: "jacket",
+            size: "L",
+            isFavorite: true,
+            photo: ""
+          })
+        }
+      );
     });
 
-    expect(alert).toHaveBeenCalledWith("Item created successfully!");
+    expect(alert).toHaveBeenCalledWith(
+      "Item created successfully!"
+    );
   });
 
   test("handles server error response", async () => {
@@ -181,12 +245,16 @@ describe("Upload Component", () => {
     });
 
     render(<Upload />);
-    
-    fireEvent.change(screen.getByLabelText("Item Name"), { target: { value: "Test Item" } });
+
+    fireEvent.change(screen.getByLabelText("Item Name"), {
+      target: { value: "Test Item" }
+    });
     fireEvent.click(screen.getByText("Submit"));
 
     await waitFor(() => {
-      expect(alert).toHaveBeenCalledWith("Error: Item already exists");
+      expect(alert).toHaveBeenCalledWith(
+        "Error: Item already exists"
+      );
     });
   });
 
@@ -194,19 +262,27 @@ describe("Upload Component", () => {
     fetch.mockRejectedValueOnce(new Error("Network error"));
 
     render(<Upload />);
-    
-    fireEvent.change(screen.getByLabelText("Item Name"), { target: { value: "Test Item" } });
+
+    fireEvent.change(screen.getByLabelText("Item Name"), {
+      target: { value: "Test Item" }
+    });
     fireEvent.click(screen.getByText("Submit"));
 
     await waitFor(() => {
-      expect(alert).toHaveBeenCalledWith("Network error - please try again");
+      expect(alert).toHaveBeenCalledWith(
+        "Network error - please try again"
+      );
     });
   });
 
   test("handles successful image upload", async () => {
-    const mockFile = new File(['test'], 'test.jpg', { type: 'image/jpeg' });
+    const mockFile = new File(["test"], "test.jpg", {
+      type: "image/jpeg"
+    });
     const mockArrayBuffer = new ArrayBuffer(8);
-    const mockImageResponse = { url: "http://localhost:8000/uploads/test.jpg" };
+    const mockImageResponse = {
+      url: "http://localhost:8000/uploads/test.jpg"
+    };
 
     // Mock FileReader
     const mockFileReader = {
@@ -224,13 +300,13 @@ describe("Upload Component", () => {
     });
 
     render(<Upload />);
-    
+
     const fileInput = screen.getByLabelText("Upload Photo");
-    
+
     // Simulate file selection
-    Object.defineProperty(fileInput, 'files', {
+    Object.defineProperty(fileInput, "files", {
       value: [mockFile],
-      writable: false,
+      writable: false
     });
 
     fireEvent.change(fileInput);
@@ -253,11 +329,15 @@ describe("Upload Component", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getByText("Image uploaded")).toBeInTheDocument();
+      expect(
+        screen.getByText("Image uploaded")
+      ).toBeInTheDocument();
     });
   });
   test("handles image upload failure", async () => {
-    const mockFile = new File(['test'], 'test.jpg', { type: 'image/jpeg' });
+    const mockFile = new File(["test"], "test.jpg", {
+      type: "image/jpeg"
+    });
     const mockArrayBuffer = new ArrayBuffer(8);
 
     // Mock FileReader
@@ -275,13 +355,13 @@ describe("Upload Component", () => {
     });
 
     render(<Upload />);
-    
+
     const fileInput = screen.getByLabelText("Upload Photo");
-    
+
     // Simulate file selection
-    Object.defineProperty(fileInput, 'files', {
+    Object.defineProperty(fileInput, "files", {
       value: [mockFile],
-      writable: false,
+      writable: false
     });
 
     fireEvent.change(fileInput);
@@ -296,13 +376,13 @@ describe("Upload Component", () => {
 
   test("does not upload image when no file is selected", () => {
     render(<Upload />);
-    
+
     const fileInput = screen.getByLabelText("Upload Photo");
-    
+
     // Simulate no file selection
-    Object.defineProperty(fileInput, 'files', {
+    Object.defineProperty(fileInput, "files", {
       value: [],
-      writable: false,
+      writable: false
     });
 
     fireEvent.change(fileInput);
