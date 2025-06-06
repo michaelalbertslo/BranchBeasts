@@ -255,36 +255,36 @@ function OutfitGen() {
   // })
 
   return (
-    <div className="flex flex-col justify-center py-5 space-y-5">
+    <div className="flex flex-col justify-center py-2 space-y-1 mx-10">
 
       {/* ── HAT Row ── */}
       <div className="grid grid-cols-5 items-center gap-2">
         {/* Keep */}
         <button
           onClick={toggleHatKeep}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            hatKeep ? "bg-yellow-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            hatKeep ? "bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#9fe11d] via-gray-200 to-[#9fe11d] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50"
           }`}>
           {hatKeep ? "Held" : "Keep"}
         </button>
         {/* Left arrow */}
-        <button onClick={prevHat} className="flex justify-center py-2">
-          <FiArrowLeft className="text-4xl" />
+        <button onClick={prevHat} className="flex justify-center">
+          <FiArrowLeft className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {/*Hat image container*/ }
         {hatNull ? (
-          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-center items-center bg-gray-100 rounded-lg shadow-md">
             <span className="text-xs text-gray-500">No Hat</span>
           </div>
         ) : hats.length > 0 ? (
-          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
+          <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105">
             <img
               src={hats[hatIndex].image_url}
               alt="Hat"
               className="w-full h-full object-cover"
             />
             {hatKeep && (
-              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+              <div className="absolute inset-0 bg-[#daffa0] opacity-15 rounded-lg pointer-events-none" />
             )}
           </div>
         ) : (
@@ -293,14 +293,14 @@ function OutfitGen() {
           </div>
         )}
         {/* Right arrow */}
-        <button onClick={nextHat} className="flex justify-center py-2">
-          <FiArrowRight className="text-4xl" />
+        <button onClick={nextHat} className="flex justify-center">
+          <FiArrowRight className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {/* Nullify */}
         <button
           onClick={toggleHatNull}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            hatNull ? "bg-red-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            hatNull ? "bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#F5A623] via-gray-200 to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5"
           }`}
         >
           {hatNull ? "Restore" : "Nullify"}
@@ -311,27 +311,27 @@ function OutfitGen() {
       <div className="grid grid-cols-5 items-center gap-2">
         <button
           onClick={toggleJacketKeep}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            jacketKeep ? "bg-yellow-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            jacketKeep ? "bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#9fe11d] via-gray-200 to-[#9fe11d] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50"
           }`}>
           {jacketKeep ? "Held" : "Keep"}
         </button>
-        <button onClick={prevJacket} className="flex justify-center py-2">
-          <FiArrowLeft className="text-4xl" />
+        <button onClick={prevJacket} className="flex justify-center">
+          <FiArrowLeft className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {jacketNull ? (
-          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-center items-center bg-gray-100 rounded-lg shadow-md">
             <span className="text-xs text-gray-500">No Jacket</span>
           </div>
         ) : jackets.length > 0 ? (
-          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
+          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105">
             <img
               src={jackets[jacketIndex].image_url}
               alt="Jacket"
               className="w-full h-full object-cover"
             />
             {jacketKeep && (
-              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+              <div className="absolute inset-0 bg-yellow-100 opacity-15 rounded-lg pointer-events-none" />
             )}
           </div>
         ) : (
@@ -339,13 +339,13 @@ function OutfitGen() {
             <span className="text-xs text-gray-500">No Jackets in your closet</span>
           </div>
         )}
-        <button onClick={nextJacket} className="flex justify-center py-2">
-          <FiArrowRight className="text-4xl" />
+        <button onClick={nextJacket} className="flex justify-center">
+          <FiArrowRight className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         <button
           onClick={toggleJacketNull}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            jacketNull ? "bg-red-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            jacketNull ? "bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#F5A623] via-gray-200 to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5"
           }`}
         >
           {jacketNull ? "Restore" : "Nullify"}
@@ -356,28 +356,28 @@ function OutfitGen() {
       <div className="grid grid-cols-5 items-center gap-2">
         <button
           onClick={toggleShirtKeep}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            shirtKeep ? "bg-yellow-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            shirtKeep ? "bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#9fe11d] via-gray-200 to-[#9fe11d] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50"
           }`}>
           {shirtKeep ? "Held" : "Keep"}
         </button>
-        <button onClick={prevShirt} className="flex justify-center py-2">
-          <FiArrowLeft className="text-4xl" />
+        <button onClick={prevShirt} className="flex justify-center">
+          <FiArrowLeft className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {/*Shirt Image Container */}
         {shirtNull ? (
-          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-center items-center bg-gray-100 rounded-lg shadow-md">
             <span className="text-xs text-gray-500">No Shirt</span>
           </div>
         ) : shirts.length > 0 ? (
-          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
+          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105">
             <img
               src={shirts[shirtIndex].image_url}
               alt="Shirt"
               className="w-full h-full object-cover"
             />
             {shirtKeep && (
-              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+              <div className="absolute inset-0 bg-yellow-100 opacity-15 rounded-lg pointer-events-none" />
             )}
           </div>
         ) : (
@@ -385,13 +385,13 @@ function OutfitGen() {
             <span className="text-xs text-gray-500">No shirts in your closet</span>
           </div>
         )}
-        <button onClick={nextShirt} className="flex justify-center py-2">
-          <FiArrowRight className="text-4xl" />
+        <button onClick={nextShirt} className="flex justify-center">
+          <FiArrowRight className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         <button
           onClick={toggleShirtNull}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            shirtNull ? "bg-red-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            shirtNull ? "bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#F5A623] via-gray-200 to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5"
           }`}
         >
           {shirtNull ? "Restore" : "Nullify"}
@@ -400,29 +400,29 @@ function OutfitGen() {
 
       {/* ── PANTS Row ── */}
       <div className="grid grid-cols-5 items-center gap-2">
-      <button
+        <button
           onClick={togglePantsKeep}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            pantsKeep ? "bg-yellow-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            pantsKeep ? "bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#9fe11d] via-gray-200 to-[#9fe11d] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50"
           }`}>
           {pantsKeep ? "Held" : "Keep"}
         </button>
-        <button onClick={prevPants} className="flex justify-center py-2">
-          <FiArrowLeft className="text-4xl" />
+        <button onClick={prevPants} className="flex justify-center">
+          <FiArrowLeft className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {pantsNull ? (
-          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-center items-center h-50 bg-gray-100 rounded-lg shadow-md">
             <span className="text-xs text-gray-500">No Bottoms</span>
           </div>
         ) : pants.length > 0 ? (
-          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
+          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 h-75">
             <img
               src={pants[pantsIndex].image_url}
               alt="Bottoms"
               className="w-full h-full object-cover"
             />
             {pantsKeep && (
-              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+              <div className="absolute inset-0 bg-yellow-100 opacity-15 rounded-lg pointer-events-none" />
             )}
           </div>
         ) : (
@@ -430,13 +430,13 @@ function OutfitGen() {
             <span className="text-xs text-gray-500">No Bottoms in your closet</span>
           </div>
         )}
-        <button onClick={nextPants} className="flex justify-center py-2">
-          <FiArrowRight className="text-4xl" />
+        <button onClick={nextPants} className="flex justify-center">
+          <FiArrowRight className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         <button
           onClick={togglePantsNull}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            pantsNull ? "bg-red-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            pantsNull ? "bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#F5A623] via-gray-200 to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5"
           }`}
         >
           {pantsNull ? "Restore" : "Nullify"}
@@ -446,28 +446,28 @@ function OutfitGen() {
       {/* ── SOCKS Row ── */}
       <div className="grid grid-cols-5 items-center gap-2">
         <button
-          onClick={toggleSocksKeep}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            socksKeep ? "bg-yellow-200" : ""
+          onClick={toggleSocksKeep} 
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            socksKeep ? "bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#9fe11d] via-gray-200 to-[#9fe11d] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50"
           }`}>
           {socksKeep ? "Held" : "Keep"}
         </button>
-        <button onClick={prevSocks} className="flex justify-center py-2">
-          <FiArrowLeft className="text-4xl" />
+        <button onClick={prevSocks} className="flex justify-center">
+          <FiArrowLeft className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {socksNull ? (
-          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-center items-center bg-gray-100 rounded-lg shadow-md">
             <span className="text-xs text-gray-500">No Socks</span>
           </div>
         ) : socks.length > 0 ? (
-          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
+          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105">
             <img
               src={socks[socksIndex].image_url}
               alt="Socks"
               className="w-full h-full object-cover"
             />
             {socksKeep && (
-              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+              <div className="absolute inset-0 bg-yellow-100 opacity-15 rounded-lg pointer-events-none" />
             )}
           </div>
         ) : (
@@ -475,13 +475,13 @@ function OutfitGen() {
             <span className="text-xs text-gray-500">No socks in your closet</span>
           </div>
         )}
-        <button onClick={nextSocks} className="flex justify-center py-2">
-          <FiArrowRight className="text-4xl" />
+        <button onClick={nextSocks} className="flex justify-center">
+          <FiArrowRight className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         <button
           onClick={toggleSocksNull}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            socksNull ? "bg-red-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            socksNull ? "bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#F5A623] via-gray-200 to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5"
           }`}
         >
           {socksNull ? "Restore" : "Nullify"}
@@ -490,29 +490,29 @@ function OutfitGen() {
 
       {/* ── SHOES Row ── */}
       <div className="grid grid-cols-5 items-center gap-2">
-      <button
+        <button
           onClick={toggleShoesKeep}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            shoesKeep ? "bg-yellow-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            shoesKeep ? "bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#9fe11d] via-gray-200 to-[#9fe11d] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50"
           }`}>
           {shoesKeep ? "Held" : "Keep"}
         </button>
-        <button onClick={prevShoes} className="flex justify-center py-2">
-          <FiArrowLeft className="text-4xl" />
+        <button onClick={prevShoes} className="flex justify-center">
+          <FiArrowLeft className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         {shoesNull ? (
-          <div className="flex justify-center items-center w-50 h-50 bg-gray-100 rounded-lg shadow-md">
+          <div className="flex justify-center items-center bg-gray-100 rounded-lg shadow-md">
             <span className="text-xs text-gray-500">No Shoes</span>
           </div>
         ) : shoes.length > 0 ? (
-          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105 w-50 h-50">
+          <div className="group relative bg-white rounded-lg shadow-md overflow-hidden transform transition-transform duration-300 hover:scale-105">
             <img
               src={shoes[shoesIndex].image_url}
               alt="Shoes"
               className="w-full h-full object-cover"
             />
             {shoesKeep && (
-              <div className="absolute inset-0 bg-yellow-100 opacity-50 rounded-lg pointer-events-none" />
+              <div className="absolute inset-0 bg-yellow-100 opacity-15 rounded-lg pointer-events-none" />
             )}
           </div>
         ) : (
@@ -520,13 +520,13 @@ function OutfitGen() {
             <span className="text-xs text-gray-500">No shoes in your closet</span>
           </div>
         )}
-        <button onClick={nextShoes} className="flex justify-center py-2">
-          <FiArrowRight className="text-4xl" />
+        <button onClick={nextShoes} className="flex justify-center">
+          <FiArrowRight className="text-5xl rounded-full bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 hover:scale-105" />
         </button>
         <button
           onClick={toggleShoesNull}
-          className={`text-sm leading-none px-1 py-0.5 rounded border ${
-            shoesNull ? "bg-red-200" : ""
+          className={`text-sm leading-none px-1 py-2 rounded-xl hover:scale-105 ${
+            shoesNull ? "bg-gradient-to-br from-[#F5A623] via-[#F55D23] to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5" : "bg-gradient-to-br from-[#F5A623] via-gray-200 to-[#F5A623] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5"
           }`}
         >
           {shoesNull ? "Restore" : "Nullify"}
@@ -536,13 +536,13 @@ function OutfitGen() {
       <div className="flex justify-center items-center gap-4">
         <button
           onClick={randomizeAll}
-          className="border rounded text-sm leading-none px-2 py-1 bg-blue-500 text-white hover:bg-blue-600"
+          className="text-sm leading-none rounded-xl bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-xl backdrop-blur-sm border border-white/5 py-2 px-4 hover:scale-105"
         >
           Randomize
         </button>
         <button 
           onClick={saveOutfit}
-          className="border rounded text-sm leading-none px-2 py-1 bg-green-500 text-white hover:bg-green-600">
+          className="text-sm leading-none rounded-xl bg-gradient-to-br from-[#daffa0] via-[#9fe11d] to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-2 px-4 hover:scale-105">
           Save Outfit
         </button>
       </div>

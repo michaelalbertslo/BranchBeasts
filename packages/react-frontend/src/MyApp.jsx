@@ -83,7 +83,7 @@ function signupUser(creds) {
 
 
 return (
-  <div>
+  <div className="bg-[url('../public/fa-bg.jpeg')] bg-cover">
     <NavBar />
     <div className="pt-5">
       <Routes>

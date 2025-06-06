@@ -18,8 +18,8 @@ function Login({ handleSubmit, buttonLabel = "Log In", message }) {
 
 console.log("Login.jsx message:", message);
 return (
-  <div className="flex items-center justify-center min-h-screen bg-gray-50">
-    <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-md">
+  <div className="flex items-center justify-center min-h-screen">
+    <form className="w-full max-w-md rounded-2xl bg-gradient-to-b from-[#C0F0E8] via-transparent to-[#C0F0E8] shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 p-3">
       <h2 className="text-2xl font-bold mb-6 text-center">{buttonLabel}</h2>
 
       <div className="mb-4">
@@ -32,7 +32,7 @@ return (
           id="username"
           value={creds.username}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring"
+          className="w-full bg-gradient-to-br from-[#daffa0] via-transparent to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 rounded px-3 py-2 focus:outline-none focus:ring"
         />
       </div>
 
@@ -46,7 +46,7 @@ return (
           id="pwd"
           value={creds.pwd}
           onChange={handleChange}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring"
+          className="w-full bg-gradient-to-br from-[#daffa0] via-transparent to-[#daffa0] shadow-glass shadow-2xl backdrop-blur-sm border border-white/50 rounded px-3 py-2 focus:outline-none focus:ring"
         />
       </div>
 
@@ -54,7 +54,7 @@ return (
         <button
           type="button"
           onClick={submitForm}
-          className="bg-white text-black font-bold py-2 px-2 rounded w-full cursor-pointer border-2 border-black"
+          className="text-black font-bold w-full bg-gradient-to-br from-blue-300 via-blue-300 to-blue-400 shadow-glass shadow-2xl backdrop-blur-sm border border-white/5 py-1 px-4 transition hover:scale-105"
         >
           {buttonLabel}
         </button>
