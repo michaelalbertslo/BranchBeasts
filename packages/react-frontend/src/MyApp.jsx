@@ -90,7 +90,7 @@ return (
         <Route path="/" element={<Closet addAuthHeader={addAuthHeader} />} />
         <Route path="/outfits" element={<Outfits addAuthHeader={addAuthHeader} />} />
         <Route path="/outfit-gen" element={<OutfitGen />} />
-        <Route path="/upload" element={<Upload />} />
+        <Route path="/upload" element={<Upload addAuthHeader={addAuthHeader}/>} />
         <Route path="/view" element={<View />} />
         <Route
           path="/login"
